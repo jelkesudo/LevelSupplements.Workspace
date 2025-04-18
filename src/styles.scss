@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+$purple: rgb(197, 169, 255);
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+
+$primary: $purple;
+
+@font-face {
+    font-family: "level-fitness-italic";
+    src: url("../public/fonts/norwester.otf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: "level-fitness-italic";
+    background-color: $purple;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+.w-80{
+    width: 80%;
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+  

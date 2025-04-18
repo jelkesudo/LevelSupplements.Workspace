@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { ContactsPageComponent } from './pages/contacts-page/contacts-page.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ContactsPageComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule,
+    NavbarComponent,
+    LandingPageComponent
   ],
   providers: [
     provideClientHydration()
