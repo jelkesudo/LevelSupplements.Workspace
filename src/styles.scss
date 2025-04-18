@@ -18,16 +18,33 @@ $primary: $purple;
 
 body{
     font-family: "level-fitness-italic";
-    background-color: $purple;
+    background-color: $white;
 }
 
 .fade-in {
     animation: fadeIn 0.5s ease-in forwards;
 }
 
+.text-purple{
+    color: $purple
+}
+
 .w-80{
     width: 80%;
 }
+
+.btn {
+    background-color: $purple;
+    color: $white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: darken($purple, 10%);
+    }
+  }
 
 @keyframes fadeIn {
     0% {

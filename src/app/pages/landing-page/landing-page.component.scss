@@ -1,19 +1,58 @@
 @import "../../../styles.scss";
 
 .hero-section {
-    background-color: $purple;
-    height: 100vh;
-    padding: 2rem;
-}
-
-.hero-section {
-    //background: url('images/hero-image.jpg') no-repeat center center/cover;
+    background: linear-gradient(to right, $white, #f8f8f8);
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: left;
     height: 80vh;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-}
+    
+    .hero-text-upper, .hero-image{
+        width: 48% !important;
+    }
+    .hero-text-upper{
+        display: flex;
+        justify-content: end;
+        .hero-text {
+            max-width: 600px;
+            h1 {
+              font-size: 3rem;
+              color: $purple;
+              font-weight: bold;
+            }
+            p {
+              font-size: 1.2rem;
+              color: $black;
+              margin-bottom: 1.5rem;
+            }
+            .btn {
+              background-color: $purple;
+              color: $white;
+              border: none;
+              padding: 0.75rem 1.5rem;
+              font-weight: 500;
+              border-radius: 8px;
+        
+              &:hover {
+                background-color: darken($purple, 10%);
+              }
+            }
+          }
+    }
+    .hero-image {
+      flex: 1;
+      text-align: left;
+        margin-left: 40px;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
   
 .product-card {
-    background-color: var(--white);
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -32,11 +71,24 @@
 }
 
 .cta-banner {
-    background-color: var(--purple);
     background-image: linear-gradient(120deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1));
 }
 
 .carousel img {
     max-height: 300px;
     object-fit: contain;
+}
+
+@media screen and (max-width: 770px) {
+    .hero-section {
+        .hero-text-upper{
+            width: 100% !important;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-image {
+            display: none;
+        }
+      }
 }
