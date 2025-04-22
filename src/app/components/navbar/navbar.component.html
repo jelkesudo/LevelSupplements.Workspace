@@ -1,21 +1,34 @@
 <nav class="main-nav">
   <div class="nav-container">
-    <div class="menu-toggle" (click)="toggleSideMenu()">
-      ☰
+    <div class="first-part">
+      <div class="menu-toggle" (click)="toggleSideMenu()">
+        ☰
+      </div>
+  
+      <div class="logo ms-md-0 ms-2">
+        <a routerLink="/"><img src="images/LevelSuplementiLogo.png" alt="LevelSuplementiLogo" /></a>
+      </div>
+  
+      <ul class="nav-links ms-3">
+        <li><a routerLink="/">Početna</a></li>
+        <li><a routerLink="/kontakt">Kontakt</a></li>
+      </ul>
     </div>
-
-    <div class="logo ms-md-0 ms-2">
-      <a routerLink="/"><img src="images/LevelSuplementiLogo.png" alt="LevelSuplementiLogo" /></a>
+    <div class="second-part">
+      <div class="search-bar">
+        <input type="text" placeholder="Pretražite" name="" id=""><i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="utility-panel">
+        <ul>
+          <li><i class="fa-regular fa-user"></i></li>
+          <li><i class="fa-solid fa-cart-shopping"></i></li>
+        </ul>
+      </div>
     </div>
-
-    <ul class="nav-links mt-3">
-      <li><a routerLink="/">Home</a></li>
-      <li><a routerLink="/kontakt">Contact</a></li>
-    </ul>
   </div>
 
   <div class="side-menu" [ngClass]="{ 'open': isSideMenuOpen }">
-    <div class="close-btn text-white" (click)="closeSideMenu()">✕</div>
+    <div class="close-btn" (click)="closeSideMenu()">✕</div>
     <ul>
       <li><a routerLink="/" (click)="closeSideMenu()">Pocetna</a></li>
       <li><a routerLink="/kontakt" (click)="closeSideMenu()">Kontakt</a></li>
