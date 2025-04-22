@@ -1,23 +1,30 @@
-<div class="w-100 bg-light position-fixed">
-    <nav class="w-80 mx-auto navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" routerLink="/">
-            <img src="images/LevelSuplementiLogo.png" alt="LevelSuplementiLogo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item active">
-              <a class="nav-link" routerLink="/">Početna</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Prodavnica</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/kontakt">Kontakt</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
-</div>
+<nav class="main-nav">
+  <div class="nav-container">
+    <div class="menu-toggle" (click)="toggleSideMenu()">
+      ☰
+    </div>
+
+    <div class="logo ms-md-0 ms-2">
+      <a routerLink="/"><img src="images/LevelSuplementiLogo.png" alt="LevelSuplementiLogo" /></a>
+    </div>
+
+    <ul class="nav-links mt-3">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/kontakt">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="side-menu" [ngClass]="{ 'open': isSideMenuOpen }">
+    <div class="close-btn text-white" (click)="closeSideMenu()">✕</div>
+    <ul>
+      <li><a routerLink="/" (click)="closeSideMenu()">Pocetna</a></li>
+      <li><a routerLink="/kontakt" (click)="closeSideMenu()">Kontakt</a></li>
+    </ul>
+  </div>
+
+  <div
+    class="overlay-blur"
+    *ngIf="isSideMenuOpen"
+    (click)="closeSideMenu()"
+  ></div>
+</nav>
