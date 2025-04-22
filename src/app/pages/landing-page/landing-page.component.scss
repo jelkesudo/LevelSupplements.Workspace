@@ -19,26 +19,14 @@
             max-width: 600px;
             h1 {
               font-size: 3rem;
-              color: $purple;
               font-weight: bold;
             }
             p {
               font-size: 1.2rem;
-              color: $black;
+              
               margin-bottom: 1.5rem;
             }
-            .btn {
-              background-color: $purple;
-              color: $white;
-              border: none;
-              padding: 0.75rem 1.5rem;
-              font-weight: 500;
-              border-radius: 8px;
-        
-              &:hover {
-                background-color: darken($purple, 10%);
-              }
-            }
+            
           }
     }
     .hero-image {

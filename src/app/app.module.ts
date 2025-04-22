@@ -7,6 +7,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { ContactsPageComponent } from './pages/contacts-page/contacts-page.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { FooterComponent } from './components/footer/footer.component';
     AppRoutingModule,
     RouterModule,
     NavbarComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    CommonModule
   ],
   providers: [
     provideClientHydration()
