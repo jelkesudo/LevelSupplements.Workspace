@@ -1,43 +1,57 @@
-<nav class="main-nav">
-  <div class="nav-container">
-    <div class="first-part">
-      <div class="menu-toggle" (click)="toggleSideMenu()">
-        ☰
-      </div>
-  
-      <div class="logo ms-md-0 ms-2">
-        <a routerLink="/"><img src="images/LevelSuplementiLogo.png" alt="LevelSuplementiLogo" /></a>
-      </div>
-  
-      <ul class="nav-links ms-3">
-        <li><a routerLink="/">Početna</a></li>
-        <li><a routerLink="/kontakt">Kontakt</a></li>
-      </ul>
-    </div>
-    <div class="second-part">
-      <div class="search-bar">
-        <input type="text" placeholder="Pretražite" name="" id=""><i class="fa-solid fa-magnifying-glass"></i>
-      </div>
-      <div class="utility-panel">
-        <ul>
-          <li><i class="fa-regular fa-user"></i></li>
-          <li><i class="fa-solid fa-cart-shopping"></i></li>
+<div class="wrapper-nav">
+  <div class="w-100 black-banner">
+    <p>level up your fitness</p>
+  </div>
+  <div class="rose-banner">
+    <p>"Premium suplementacija koja podiže tvoj nivo na viši Level"</p>
+  </div>
+  <nav class="main-nav">
+    <div class="nav-container">
+      <div class="first-part">
+        <div class="menu-toggle" (click)="toggleSideMenu()">
+          ☰
+        </div>
+    
+        <div class="logo ms-md-0 ms-2">
+          <a routerLink="/"><img src="images/LevelSuplementiLogo.png" alt="LevelSuplementiLogo" /></a>
+        </div>
+    
+        <ul class="nav-links ms-3">
+          <li><a routerLink="">Proteini</a></li>
+          <li><a routerLink="">Pre-Workout</a></li>
+          <li><a routerLink="">Post-Workout</a></li>
+          <li><a routerLink="">Aminokiseline</a></li>
+          <li><a routerLink="">Sagorevači masti</a></li>
+          <li><a routerLink="">Recepti</a></li>
+          <li><a routerLink="">O Nama</a></li>
+          <li><a routerLink="/kontakt">Kontakt</a></li>
         </ul>
       </div>
+      <!-- <div class="second-part">
+        <div class="search-bar">
+          <input type="text" placeholder="Pretražite" name="" id=""><i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="utility-panel">
+          <ul>
+            <li><i class="fa-regular fa-user"></i></li>
+            <li><i class="fa-solid fa-cart-shopping"></i></li>
+          </ul>
+        </div>
+      </div> -->
     </div>
-  </div>
-
-  <div class="side-menu" [ngClass]="{ 'open': isSideMenuOpen }">
-    <div class="close-btn" (click)="closeSideMenu()">✕</div>
-    <ul>
-      <li><a routerLink="/" (click)="closeSideMenu()">Pocetna</a></li>
-      <li><a routerLink="/kontakt" (click)="closeSideMenu()">Kontakt</a></li>
-    </ul>
-  </div>
-
-  <div
-    class="overlay-blur"
-    *ngIf="isSideMenuOpen"
-    (click)="closeSideMenu()"
-  ></div>
-</nav>
+  
+    <div class="side-menu" [ngClass]="{ 'open': isSideMenuOpen }">
+      <div class="close-btn" (click)="closeSideMenu()">✕</div>
+      <ul>
+        <li><a routerLink="/" (click)="closeSideMenu()">Pocetna</a></li>
+        <li><a routerLink="/kontakt" (click)="closeSideMenu()">Kontakt</a></li>
+      </ul>
+    </div>
+  
+    <div
+      class="overlay-blur"
+      *ngIf="isSideMenuOpen"
+      (click)="closeSideMenu()"
+    ></div>
+  </nav>
+</div>
