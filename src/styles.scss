@@ -1,4 +1,5 @@
 $purple: rgb(197, 169, 255);
+$paleRose: rgb(239, 232, 255);
 $black: rgb(0, 0, 0);
 $white: rgb(255, 255, 255);
 
@@ -28,6 +29,12 @@ ul{
 a{
   text-decoration: none;
   color: $black;
+}
+
+@mixin d-flex-jcc-aic{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .fade-in {
