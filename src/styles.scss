@@ -3,11 +3,16 @@ $paleRose: rgb(239, 232, 255);
 $black: rgb(0, 0, 0);
 $white: rgb(255, 255, 255);
 
-$primary: $purple;
+$primary: $paleRose;
 
 @font-face {
     font-family: "level-fitness-italic";
     src: url("../public/fonts/norwester.otf");
+}
+
+@font-face {
+  font-family: "level-fitness-secondary";
+  src: url("../public/fonts/FiraSans-Regular.ttf");
 }
 
 *{
@@ -24,6 +29,7 @@ body{
 
 ul{
   list-style-type: none;
+  font-family: "level-fitness-secondary";
 }
 
 a{
@@ -42,7 +48,11 @@ a{
 }
 
 .text-purple{
-    color: $purple
+    color: $purple;
+}
+
+.text-paleRose{
+  color: $paleRose;
 }
 
 .w-80{
@@ -50,15 +60,15 @@ a{
 }
 
 .btn {
-    background-color: $purple;
-    color: $white;
+    background-color: $paleRose;
+    color: $black;
     border: none;
     padding: 0.75rem 1.5rem;
     font-weight: 500;
     border-radius: 8px;
 
     &:hover {
-      background-color: darken($purple, 10%);
+      background-color: darken($paleRose, 10%);
     }
   }
 

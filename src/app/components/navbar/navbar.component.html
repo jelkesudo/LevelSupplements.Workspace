@@ -5,6 +5,11 @@
   <div class="rose-banner">
     <p>"Premium suplementacija koja podiže tvoj nivo na viši Level"</p>
   </div>
+  <div class="w-100 bg-white">
+    <div class="utility-banner bg-white">
+      
+    </div>
+  </div>
   <nav class="main-nav">
     <div class="nav-container">
       <div class="first-part">
@@ -17,19 +22,21 @@
         </div>
     
         <ul class="nav-links ms-3">
-          <li><a routerLink="">Proteini</a></li>
+          <li><a routerLink="/prodavnica">Proteini</a></li>
+          <li><a routerLink="">Kreatin</a></li>
           <li><a routerLink="">Pre-Workout</a></li>
           <li><a routerLink="">Post-Workout</a></li>
           <li><a routerLink="">Aminokiseline</a></li>
           <li><a routerLink="">Sagorevači masti</a></li>
-          <li><a routerLink="">Recepti</a></li>
+          <li><a routerLink="">Zdravlje</a></li>
           <li><a routerLink="">O Nama</a></li>
           <li><a routerLink="/kontakt">Kontakt</a></li>
         </ul>
       </div>
-      <!-- <div class="second-part">
-        <div class="search-bar">
-          <input type="text" placeholder="Pretražite" name="" id=""><i class="fa-solid fa-magnifying-glass"></i>
+      <div class="second-part text-purple">
+        <i class="fa-solid fa-magnifying-glass search-button me-2" (click)="toggleSearchBar($event)"></i>
+        <div class="search-bar" *ngIf="showSearchBar">
+          <input class="me-2" type="text" placeholder="Pretražite..." />
         </div>
         <div class="utility-panel">
           <ul>
@@ -37,7 +44,7 @@
             <li><i class="fa-solid fa-cart-shopping"></i></li>
           </ul>
         </div>
-      </div> -->
+      </div>
     </div>
   
     <div class="side-menu" [ngClass]="{ 'open': isSideMenuOpen }">
