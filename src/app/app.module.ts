@@ -8,11 +8,13 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { ContactsPageComponent } from './pages/contacts-page/contacts-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 @NgModule({
   declarations: [
     AppComponent,
     ContactsPageComponent,
     FooterComponent,
+    ShopPageComponent,
   ],
   imports: [
     BrowserModule,

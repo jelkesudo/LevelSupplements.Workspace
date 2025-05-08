@@ -11,9 +11,31 @@
   }
   .rose-banner{
     background-color: $paleRose;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "level-fitness-secondary";
     padding: 5px 0px;
     @include d-flex-jcc-aic();
+  }
+  .utility-banner{
+    width: 80%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 0px auto;
+    color: $purple;
+    .utility-panel{
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      ul{
+        display: flex;
+        justify-content: end;
+        li{
+          margin: 0px 5px;
+          cursor: pointer;
+        }
+      }
+    }
   }
   .main-nav {
       background: $white;
@@ -27,41 +49,44 @@
         justify-content: start;
         width: 80%;
         margin: 0px auto;
-  
         .first-part{
           width: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
         }
-        // .second-part{
-        //   display: flex;
-        //   justify-content: end;
-        //   align-items: center;
-        //   .search-bar{
-        //     margin-right: 25px;
-        //     input{
-        //       border: 0px;
-        //       padding: 5px 7px;
-        //       border-bottom: 0.5px solid #b6b6b6;
-        //       outline: none;
-        //     }
-            
-        //   }
-        //   .utility-panel{
-        //     ul{
-        //       display: flex;
-        //       justify-content: center;
-        //       li{
-        //         margin: 0px 5px;
-        //       }
-        //     }
-        //   }
-        //   i{
-        //     cursor: pointer;
-        //     font-size: 1.2em;
-        //   }
-        // }
+        .second-part{
+          display: flex;
+          justify-content: end;
+          align-items: center;
+          .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+          }
+          .search-bar {
+            margin-left: 10px;
+            animation: slideIn 0.3s ease-out;
+            input{
+              outline: none;
+              border: none;
+              border-bottom: 1px solid $black;
+            }
+          }
+          .utility-panel{
+            ul{
+              display: flex;
+              justify-content: center;
+              li{
+                margin: 0px 5px;
+              }
+            }
+          }
+          i{
+            cursor: pointer;
+            font-size: 1.2em;
+          }
+        }
       }
     
       .logo {
@@ -160,7 +185,25 @@
 }
 
 @media (max-width: 770px) {
+  .main-nav {
+    .nav-container {
+      .first-part{
+        justify-content: start !important;
+      }
+    }
+  }
   .black-banner, .rose-banner{
-    display: none;
+    display: none !important;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

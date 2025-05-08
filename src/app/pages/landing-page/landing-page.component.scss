@@ -1,45 +1,10 @@
 @import "../../../styles.scss";
-
 .hero-section {
-    background: linear-gradient(to right, $white, #f8f8f8);
-    padding: 4rem 2rem;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    text-align: left;
-    height: 80vh;
-    
-    .hero-text-upper, .hero-image{
-        width: 48% !important;
+    padding-top: 155px;
+    img{
+        width: 100%;
     }
-    .hero-text-upper{
-        display: flex;
-        justify-content: end;
-        .hero-text {
-            max-width: 600px;
-            h1 {
-              font-size: 3rem;
-              font-weight: bold;
-            }
-            p {
-              font-size: 1.2rem;
-              
-              margin-bottom: 1.5rem;
-            }
-            
-          }
-    }
-    .hero-image {
-      flex: 1;
-      text-align: left;
-        margin-left: 40px;
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-    }
-  }
-  
+}
 .product-card {
     padding: 1.5rem;
     border-radius: 12px;
@@ -49,7 +14,7 @@
   
 .product-card:hover {
     transform: translateY(-5px);
-    background-color: $purple;
+    background-color: $paleRose;
     color: $white;
 }
 

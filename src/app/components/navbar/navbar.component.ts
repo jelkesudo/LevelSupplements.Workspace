@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -11,6 +11,12 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   isSideMenuOpen = false;
+  showSearchBar = false;
+
+  toggleSearchBar(event: MouseEvent) {
+    event.stopPropagation();
+    this.showSearchBar = !this.showSearchBar;
+  }
 
   toggleSideMenu(): void {
     this.isSideMenuOpen = !this.isSideMenuOpen;
