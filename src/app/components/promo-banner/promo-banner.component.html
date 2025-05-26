@@ -1,0 +1,17 @@
+<div class="promo-banner" [class.reverse]="reverseOrder">
+  <div
+    class="image-background"
+    [ngStyle]="{'background-image': 'url(' + imageSrc + ')'}"
+  ></div>
+  <div class="content">
+    <h2>{{ heading }}</h2>
+    <div class="subheading" *ngIf="subheading">{{ subheading }}</div>
+    <div class="description">{{ description }}</div>
+    <a
+      *ngIf="buttonText && buttonLink"
+      [href]="buttonLink"
+      class="cta-button"
+      >{{ buttonText }}</a
+    >
+  </div>
+</div>

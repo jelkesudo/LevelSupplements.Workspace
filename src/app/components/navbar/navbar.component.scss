@@ -2,6 +2,7 @@
 .wrapper-nav{
   position: fixed;
   width: 100%;
+  z-index: 9;
   .black-banner{
     background-color: $black;
     color: $paleRose;
