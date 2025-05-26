@@ -10,6 +10,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { PromoBannerComponent } from './components/promo-banner/promo-banner.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,14 +19,15 @@ import { PromoBannerComponent } from './components/promo-banner/promo-banner.com
     FooterComponent,
     ShopPageComponent,
     PromoBannerComponent,
-    LandingPageComponent
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     NavbarComponent,
-    CommonModule
+    CommonModule,
+    NgbCarouselModule
   ],
   providers: [
     provideClientHydration()

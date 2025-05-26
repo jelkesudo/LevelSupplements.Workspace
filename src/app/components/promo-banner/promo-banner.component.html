@@ -1,4 +1,5 @@
-<div class="promo-banner" [class.reverse]="reverseOrder">
+<div class="w-100 position-relative">
+  <div class="promo-banner" [class.reverse]="reverseOrder">
   <div
     class="image-background"
     [ngStyle]="{'background-image': 'url(' + imageSrc + ')'}"
@@ -9,9 +10,10 @@
     <div class="description">{{ description }}</div>
     <a
       *ngIf="buttonText && buttonLink"
-      [href]="buttonLink"
-      class="cta-button"
-      >{{ buttonText }}</a
+      [href]="buttonLink">
+      <button class="btn">{{ buttonText }}</button></a
     >
   </div>
 </div>
+</div>
+
