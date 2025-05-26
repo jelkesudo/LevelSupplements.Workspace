@@ -1,0 +1,57 @@
+.promo-banner {
+  position: relative;
+  display: flex;
+  height: 600px;
+  color: black;
+  overflow: hidden;
+  z-index: 8;
+
+  .image-background {
+    flex: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 50%;
+  }
+
+  .content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 50%;
+    background-color: #f4edff;
+    color: black;
+  }
+  a{
+    color:#f4edff;
+  }
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
+  @media (max-width: 991px) {
+    height: auto;
+    flex-direction: column;
+
+    .image-background {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+    }
+
+    .content {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      max-width: 100%;
+      height: 300px;
+      padding: 1.5rem;
+      z-index: 2;
+      text-align: center;
+    }
+  }
+}

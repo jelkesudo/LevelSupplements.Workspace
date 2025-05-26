@@ -3,7 +3,7 @@
   <img src="images/PREVLAKE_6.webp" alt="hero-section">
 </section>
 <!-- Bestseller -->
-<section class="bestsellers mx-auto container text-center py-5">
+<!-- <section class="bestsellers mx-auto container text-center py-5">
     <h2 class="fw-bold mb-4">Izdvajamo</h2>
     <div class="row g-4 justify-content-center text-purple">
       <div class="col-10 col-md-3 product-card">
@@ -22,13 +22,13 @@
         <p>€29.99</p>
       </div>
     </div>
-</section>
+</section> -->
 <!-- Trending Section -->
-<section class="trending py-5 mx-auto container text-center">
+<!-- <section class="trending py-5 mx-auto container text-center">
     <h2 class="fw-bold mb-3">Novo kod nas</h2>
     <p>Protein koji je nova adicija kolekciji koju pripremamo za Vas</p>
     <a href="#" class="btn btn-primary px-2 py-1">Pogledajte</a>
-</section>
+</section> -->
 <!-- Carousel
 <section class="product-carousel mx-auto py-5 bg-light text-center">
     <h2 class="fw-bold mb-4">Trenutno na glasu</h2>
@@ -53,6 +53,18 @@
     </div>
 </section> -->
 <!-- CTA Banner -->
+<app-promo-banner
+  [imageSrc]="'images/SEJK.png'"
+  [heading]="'IMATE PROBLEM SA VARENJEM?'"
+
+  [subheading]="'JOŠ NISTE PROBALI SUPREME WHEY PROTEIN'"
+  [description]="
+    'Najnovija IHS SUPREME WHEY formula sadrži DigeZyme®, napredni kompleks digestivnih enzima koji olakšavaju varenje i pomažu telu da izbegne nadutost i osećaj nelagodе.'
+  "
+  [buttonText]="'SAZNAJ VIŠE'"
+  [buttonLink]="'/proizvodi/supreme-whey'"
+  [reverseOrder]="true"
+></app-promo-banner>
 <section class="cta-banner mx-auto text-center py-5">
     <h2 class="fw-bold py-2">Dignite svoje fitness putovanje na viši nivo</h2>
     <p class="lead py-2">Brza i jednostavna isporuka. Zadovoljstvo zagarantovano.</p>
