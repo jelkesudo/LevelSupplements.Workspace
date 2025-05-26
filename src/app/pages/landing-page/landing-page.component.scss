@@ -1,8 +1,10 @@
 @import "../../../styles.scss";
 .hero-section {
     padding-top: 155px;
-    img{
-        width: 100%;
+    .carousel-item{
+        img{
+            width: 100%;
+        }
     }
 }
 .product-card {
