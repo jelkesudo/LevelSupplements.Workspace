@@ -1,0 +1,41 @@
+/* thermo-pump-card.component.css */
+.thermo-card {
+  width: 200px;
+  height: 300px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.product-name {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.name-line {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.price-section {
+  margin-bottom: 40px;
+  font-size: 18px;
+  color: #333;
+}

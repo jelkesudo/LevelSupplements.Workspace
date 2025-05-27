@@ -10,6 +10,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { PromoBannerComponent } from './components/promo-banner/promo-banner.component';
+import { FadeCarouselComponent } from './components/fade-carousel/fade-carousel.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { PromoBannerComponent } from './components/promo-banner/promo-banner.com
     ShopPageComponent,
     PromoBannerComponent,
     LandingPageComponent,
+    FadeCarouselComponent,
+    CarouselComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
