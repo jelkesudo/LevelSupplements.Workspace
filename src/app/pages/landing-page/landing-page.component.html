@@ -1,20 +1,19 @@
 <!-- Hero Section -->
 <div class="d-flex flex-column">
 <section class="hero-section">
-   
+
 </section>
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/High_Kick_start.png" class="d-block w-100" alt="High Kick Start" />
+
+<app-fade-carousel [images]="carouselImages"></app-fade-carousel>
+<div class="w-80 mx-auto">
+  <app-carousel [visibleItems]="4">
+    <div #carouselItem *ngFor="let item of items" class="item-wrapper">
+      <app-card 
+        [price]="item.price"
+        [rating]="'*****'">
+      </app-card>
     </div>
-    <div class="carousel-item">
-      <img src="images/PREVLAKE_6.webp" class="d-block w-100" alt="Prevlake 6" />
-    </div>
-    <div class="carousel-item">
-      <img src="images/proteinbanner.png" class="d-block w-100" alt="Protein Banner" />
-    </div>
-  </div>
+  </app-carousel>
 </div>
 
 

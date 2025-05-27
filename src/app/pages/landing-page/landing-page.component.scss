@@ -1,11 +1,14 @@
 @import "../../../styles.scss";
 .hero-section {
     padding-top: 155px;
-    .carousel-item{
-        img{
-            width: 100%;
-        }
-    }
+}
+.carousel-inner {
+    height: 500px !important;
+}
+
+.carousel-item img {
+    height: 100% !important;
+    object-fit: cover !important;
 }
 .product-card {
     padding: 1.5rem;
