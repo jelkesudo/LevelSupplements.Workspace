@@ -1,9 +1,6 @@
 <!-- Hero Section -->
 <div class="d-flex flex-column">
-<section class="hero-section">
-
-</section>
-
+<section class="hero-section"></section>
 <app-fade-carousel [images]="carouselImages"></app-fade-carousel>
 <div class="w-80 mx-auto">
   <app-carousel [visibleItems]="4">
@@ -41,14 +38,23 @@
   [buttonLink]="'/proizvodi'"
   [reverseOrder]="true"
 ></app-promo-banner>
+<app-banner-with-picture
+  [bannerIsVisible]="true"
+  heading="KVALITET ZASNOVAN NA NAUCI I PRAKSI"
+  text="IRON HORSE SERIES - ISH Technology je istaknut proizvođač suplemenata iz Poljske, poznat po vrhunskom kvalitetu, inovativnim formulacijama i saradnji sa profesionalnim sportistima. Njihovi proizvodi su rezultat više od decenije iskustva naučnih istraživanja i praktične primene u sportu."
+  buttonText="SAZNAJ VIŠE"
+  imgSrc="images/IHSBanner.png"
+  imgAlt="IHSBanner.png">
+</app-banner-with-picture>
 <app-promo-banner
   [imageSrc]="'images/RECEPTI.png'"
   [heading]="'VERUJEMO DA TIMSKI RAD DONOSI NAJBOLJE REZULTATE'"
   [description]="
-    'Zato smo udružili snage sa nutricionistima i fitness instruktorima, i yajedno iydvojili recepte kojima nećete odoleti. Kombinacija ydravlja, vrhunskog kvaliteta i savršenog ukusa - jer najbolji rezultati dolaze kada radimo kao tim.'
+    'Zato smo udružili snage sa nutricionistima i fitness instruktorima, i zajedno izdvojili recepte kojima nećete odoleti. Kombinacija zdravlja, vrhunskog kvaliteta i savršenog ukusa - jer najbolji rezultati dolaze kada radimo kao tim.'
   "
   [buttonText]="'KO SU LEVEL AMBASADORI'"
   [buttonLink]="'/proizvodi'"
   [reverseOrder]="false"
 ></app-promo-banner>
-</div>
+
+

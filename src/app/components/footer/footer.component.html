@@ -1,3 +1,19 @@
+<app-banner-with-picture
+[logoIsVisible]="true"
+heading="NE PROPUSTITE!"
+subtext="LEVEL FITNESS SPECIJALNE PONUDE"
+text="Mesečne promocije, besplatni saveti, first minute ponude i još mnogo toga!"
+buttonText="PRIJAVI SE"
+imgSrc="images/Logo_Teg.png"
+imgAlt="Logo_Teg.png">
+</app-banner-with-picture>
+<div class="banner-wrapper">
+  <div class="banner-track">
+    <span *ngFor="let i of repeatCount">
+      LEVEL UP YOUR FITNESS&nbsp;&nbsp;
+    </span>
+  </div>
+</div>
 <footer class="footer">
   <div class="footer-items">
     <div class="footer-item d-flex flex-column">

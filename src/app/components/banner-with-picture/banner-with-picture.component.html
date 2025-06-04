@@ -1,0 +1,16 @@
+<div class="banner-sign-up my-2">
+    <div *ngIf="bannerIsVisible" class="banner-img">
+        <img [src]="imgSrc" [alt]="imgAlt">
+    </div>
+    <div *ngIf="logoIsVisible" class="logo-img">
+        <img [src]="imgSrc" [alt]="imgAlt">
+    </div>
+    <div class="banner-context">
+        <h2>{{ heading }}</h2>
+        <div *ngIf="subtext !== ''"></div><h3>{{ subtext }}</h3>
+        <p>{{ text }}</p>
+        <div class="button-div">
+        <button class="btn btn-dark-level">{{ buttonText }}</button>
+        </div>
+    </div>
+</div>

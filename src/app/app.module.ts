@@ -13,6 +13,8 @@ import { PromoBannerComponent } from './components/promo-banner/promo-banner.com
 import { FadeCarouselComponent } from './components/fade-carousel/fade-carousel.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CardComponent } from './components/card/card.component';
+import { InfiniteCarouselComponent } from './components/infinite-carousel/infinite-carousel.component';
+import { BannerWithPictureComponent } from './components/banner-with-picture/banner-with-picture.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { CardComponent } from './components/card/card.component';
     FadeCarouselComponent,
     CarouselComponent,
     CardComponent,
+    InfiniteCarouselComponent,
+    BannerWithPictureComponent,
   ],
   imports: [
     BrowserModule,

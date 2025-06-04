@@ -1,0 +1,11 @@
+<div class="carousel-wrapper">
+    <div class="carousel-track">
+      <div class="carousel-item" *ngFor="let item of visibleItems">
+        <div class="image-container">
+          <img [src]="item.src" [alt]="item.alt" />
+        </div>
+        <p class="caption">{{ item.caption }}</p>
+      </div>
+    </div>
+  </div>
+  

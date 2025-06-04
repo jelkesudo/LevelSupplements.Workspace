@@ -9,10 +9,10 @@
   text-align: center;
   .image-background {
     flex: 1;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     width: 50%;
+    img{
+      width: 100%;
+    }
   }
 
   .content {
@@ -37,21 +37,17 @@
   @media (max-width: 991px) {
     height: auto;
 
-    .image-background {
-      width: 100%;
-      height: 400px;
-      background-size: cover;
+    &.reverse {
+      flex-direction: column !important;
     }
 
-    .content {
-      position: absolute;
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      max-width: 100%;
-      height: 400px;
-      padding: 1.5rem;
-      z-index: 2;
-      text-align: center;
+    flex-direction: column !important;
+
+    .image-background, .content{
+      width: 100%;
+    }
+    .content{
+      max-width: 100% !important;
     }
   }
 }
