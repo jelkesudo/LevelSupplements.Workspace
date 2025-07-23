@@ -83,4 +83,45 @@ a{
       opacity: 1;
     }
 }
-  
+
+// prime ng
+::ng-deep .p-carousel .p-carousel-item {
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep .p-carousel-content {
+  padding-bottom: 16px;
+}
+.p-carousel-prev-button, 
+.p-carousel-next-button {
+  background-color: black !important; 
+  color: white !important;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.p-carousel-prev-button .pi, 
+.p-carousel-next-button .pi {
+  font-size: 20px;                    /* arrow size */
+}
+
+.carousel-prev-icon,
+.carousel-next-icon {
+  background-color: black;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  border: none;
+}

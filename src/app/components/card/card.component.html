@@ -1,11 +1,21 @@
-<div class="thermo-card">
-  <div class="card-content">
-    <div class="product-name">
-      <div class="name-line">THERMO</div>
-      <div class="name-line">PUMP</div>
+<div class="product-card my-4">
+  <div class="background-wrapper">
+    <img [src]="product.image" [alt]="product.image" class="product-image" />
+  </div>
+
+  <div class="info-section">
+    <h3 class="product-title text-start">{{ product.name }}</h3>
+    <p class="product-list">Preporuka.</p>
+    <div class="d-flex justify-content-between w-100 mx-auto">
+      <p-rating
+        [ngModel]="product.rating"
+        [readonly]="true"
+        [stars]="5"
+        class="product-rating"
+      ></p-rating>
+      <div class="product-price">{{ formatPrice(product.price) }}</div>
     </div>
-    <div class="price-section">
-      {{ rating }} {{ price }}
-    </div>
+    
+
   </div>
 </div>

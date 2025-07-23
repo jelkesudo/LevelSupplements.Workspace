@@ -1,0 +1,13 @@
+<p-carousel
+    [value]="products"
+    [numVisible]="4"
+    [numScroll]="1"
+    [circular]="true"
+    [responsiveOptions]="responsiveOptions"
+    [showIndicators]="false"
+>
+  <ng-template pTemplate="item" let-product>
+    <app-card [product]="product"></app-card>
+  </ng-template>
+</p-carousel>
+

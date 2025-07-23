@@ -11,10 +11,15 @@ import { CommonModule } from '@angular/common';
 import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { PromoBannerComponent } from './components/promo-banner/promo-banner.component';
 import { FadeCarouselComponent } from './components/fade-carousel/fade-carousel.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
 import { CardComponent } from './components/card/card.component';
 import { InfiniteCarouselComponent } from './components/infinite-carousel/infinite-carousel.component';
 import { BannerWithPictureComponent } from './components/banner-with-picture/banner-with-picture.component';
+import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
+import { RatingModule } from 'primeng/rating';
+import { CardModule } from 'primeng/card';
+import { CustomCarouselComponent } from './components/custom-carousel/custom-carousel.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,20 +30,25 @@ import { BannerWithPictureComponent } from './components/banner-with-picture/ban
     PromoBannerComponent,
     LandingPageComponent,
     FadeCarouselComponent,
-    CarouselComponent,
     CardComponent,
     InfiniteCarouselComponent,
     BannerWithPictureComponent,
+    CustomCarouselComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     NavbarComponent,
     CommonModule,
+    ButtonModule,
+    CarouselModule,
+    CardModule,
+    RatingModule,
   ],
   providers: [
-    provideClientHydration()
+    //provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,8 @@
 <!-- Hero Section -->
-<div class="d-flex flex-column">
 <section class="hero-section"></section>
 <app-fade-carousel [images]="carouselImages"></app-fade-carousel>
-<div class="w-80 mx-auto">
-  <app-carousel [visibleItems]="4">
-    <div #carouselItem *ngFor="let item of items" class="item-wrapper">
-      <app-card 
-        [price]="item.price"
-        [rating]="'*****'">
-      </app-card>
-    </div>
-  </app-carousel>
-</div>
+
+<app-custom-carousel [products]="products"></app-custom-carousel>
 
 
 <app-promo-banner
