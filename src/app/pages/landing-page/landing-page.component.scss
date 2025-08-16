@@ -113,4 +113,29 @@
 
             }
         }
+.text-recepti{
+  h3{
+    font-size: 50px;
+  }
+}
+.line-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 2rem 0;
 
+  button{
+    font-size: 30px;
+    width: 40%;
+    padding: 0px;
+  }
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: #000;
+    margin: 0 1rem;
+  }
+}

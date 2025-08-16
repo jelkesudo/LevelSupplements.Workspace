@@ -1,4 +1,9 @@
 @import "../../../styles.scss";
+.main-wrapper{
+  width: 100%;
+  padding: 50px 0px;
+  background-color: $paleRose;
+}
 .promo-banner {
   position: relative;
   display: flex;
@@ -23,7 +28,7 @@
     justify-content: center;
     gap: 1rem;
     max-width: 50%;
-    background-color: $paleRose;
+    background-color: $white;
     color: $black;
   }
   .btn{
@@ -48,6 +53,12 @@
     }
     .content{
       max-width: 100% !important;
+      background-color: $paleRose;
     }
   }
+}
+@media (max-width: 991px) {
+    .main-wrapper{
+      padding: 0px !important;
+    }
 }

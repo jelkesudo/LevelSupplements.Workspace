@@ -27,4 +27,13 @@ export class LandingPageComponent {
   { id: 5, title: 'Item 5', description: 'Fifth item description', color: '#33FFF3', rating: 1, price: '999 RSD' },
   { id: 6, title: 'Item 6', description: 'Sixth item description', color: '#F3FF33', rating: 5, price: '4.500 RSD' },
 ];
+itemsFill = [
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+  ];
 }

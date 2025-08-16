@@ -1,0 +1,32 @@
+@import "../../../styles.scss";
+
+$animationSpeed: 40s;
+
+@keyframes scroll {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(calc(-250px * 7))}
+}
+
+.slider {
+	background: $paleRose;
+	margin: auto;
+	overflow: hidden;
+	width: 100%;
+  padding: 20px 0px;
+	.slide-track {
+		animation: scroll $animationSpeed linear infinite;
+		display: flex;
+	}
+	
+	.slideItem {
+    margin: 0px 10px;
+    img{
+      border-radius: 20px;
+    }
+    p{
+      font-size: 24px;
+      text-align: center;
+      color: black;
+    }
+	}
+}

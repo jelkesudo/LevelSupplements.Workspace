@@ -1,18 +1,21 @@
-<div class="w-100 position-relative my-3">
-  <div class="promo-banner" [class.reverse]="reverseOrder">
-  <div
-    class="image-background"
-  ><img [src]="imageSrc" [alt]="imageSrc"></div>
-  <div class="content">
-    <h2>{{ heading }}</h2>
-    <div class="subheading" *ngIf="subheading">{{ subheading }}</div>
-    <div class="description">{{ description }}</div>
-    <a
-      *ngIf="buttonText && buttonLink"
-      [href]="buttonLink">
-      <button class="btn">{{ buttonText }}</button></a
-    >
+<div class="main-wrapper">
+  <div class="w-100 position-relative">
+    <div class="promo-banner" [class.reverse]="reverseOrder">
+    <div
+      class="image-background"
+    ><img [src]="imageSrc" [alt]="imageSrc"></div>
+    <div class="content">
+      <h2>{{ heading }}</h2>
+      <div class="subheading" *ngIf="subheading">{{ subheading }}</div>
+      <div class="description">{{ description }}</div>
+      <a
+        *ngIf="buttonText && buttonLink"
+        [href]="buttonLink">
+        <button class="btn">{{ buttonText }}</button></a
+      >
+    </div>
+  </div>
   </div>
 </div>
-</div>
+
 

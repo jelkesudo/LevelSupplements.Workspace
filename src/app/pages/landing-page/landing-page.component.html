@@ -50,23 +50,31 @@
   [reverseOrder]="false"
 ></app-promo-banner>
 <div class="recommended-container">
-        <div class="person-card">
-          <img src="images/ROZAL.png" alt="MARCIN ROZASKI" class="person-image">
-          <div class="person-overlay">
-            <h3>MARCIN ROZASKI</h3>
-            <p>Software Engineer at XYZ Company. Passionate about coding and design.</p>
-          </div>
-        </div>
-        
-        <div class="recommended-banner">PREPORUČILI</div>
-        
-        <div class="person-card">
-          <img src="images/MATERLA.png" alt="MICHAŁ MATERIA" class="person-image">
-          <div class="person-overlay">
-            <h3>MICHAŁ MATERIA</h3>
-            <p>Software Engineer at XYZ Company. Passionate about coding and design.</p>
-          </div>
-        </div>
-
+    <div class="person-card">
+      <img src="images/ROZAL.png" alt="MARCIN ROZASKI" class="person-image">
+      <div class="person-overlay">
+        <h3>MARCIN ROZASKI</h3>
+        <p>Opis ubaciti.</p>
+      </div>
     </div>
+    
+    <div class="recommended-banner">PREPORUČILI</div>
+    
+    <div class="person-card">
+      <img src="images/MATERLA.png" alt="MICHAŁ MATERIA" class="person-image">
+      <div class="person-overlay">
+        <h3>MICHAŁ MATERIA</h3>
+        <p>Opis ubaciti.</p>
+      </div>
+    </div>
+</div>
+<div class="w-100 bg-paleRose">
+    <div class="w-80 mx-auto text-recepti">
+      <h3 class="py-3">RECEPTI</h3>
+    </div>
+    <app-custom-infinite-carousel [itemsFill]="itemsFill" [widthImg]="300"></app-custom-infinite-carousel>
+    <div class="line-button-container pb-4">
+      <button class="btn btn-dark-level">ŠTA SPREMAŠ DANAS</button>
+    </div>
+</div>
 

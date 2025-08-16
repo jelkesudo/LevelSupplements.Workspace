@@ -22,6 +22,7 @@ import { CustomCarouselComponent } from './components/custom-carousel/custom-car
 import { FormsModule } from '@angular/forms';
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeng/themes/lara';
+import { CustomInfiniteCarouselComponent } from './components/custom-infinite-carousel/custom-infinite-carousel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import Lara from '@primeng/themes/lara';
     InfiniteCarouselComponent,
     BannerWithPictureComponent,
     CustomCarouselComponent,
+    CustomInfiniteCarouselComponent,
   ],
   imports: [
     FormsModule,

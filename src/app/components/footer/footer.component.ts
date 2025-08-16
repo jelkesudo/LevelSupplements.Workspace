@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   repeatCount = Array(300);
+
+  itemsFill = [
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+    { src: 'images/recept.png', alt: "slika" },
+  ];
 }
