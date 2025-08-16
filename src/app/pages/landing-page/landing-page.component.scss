@@ -1,6 +1,6 @@
 @import "../../../styles.scss";
 .hero-section {
-    padding-top: 155px;
+    padding-top: 80px;
 }
 
 @media screen and (max-width: 770px) {
@@ -16,3 +16,101 @@
       }
     
 }
+
+
+.recommended-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+.person-card {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  width: 45%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.person-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.person-card:hover .person-image {
+  transform: scale(1.05);
+}
+
+.person-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+  text-align: center;
+}
+
+.person-card:hover .person-overlay {
+  opacity: 1;
+}
+
+.person-overlay h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.person-overlay p {
+  margin: 0;
+  font-size: 16px;
+}
+
+        .recommended-banner {
+            width: 8%;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            text-align: center;
+            padding: 20px 10px;
+            background-color: black;
+            color: grey;
+            font-weight: bold;
+            letter-spacing: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+        }
+        .person-card:hover .person-name {
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .recommended-container {
+                flex-direction: column;
+            }
+            .person-card {
+                width: 100%;
+            }
+            .person-overlay{
+                opacity: 1;
+            }
+            .recommended-banner {
+                width: 100%;
+                writing-mode: horizontal-tb;
+                transform: none;
+                letter-spacing: 0px;
+
+            }
+        }
+

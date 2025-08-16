@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +20,8 @@ import { RatingModule } from 'primeng/rating';
 import { CardModule } from 'primeng/card';
 import { CustomCarouselComponent } from './components/custom-carousel/custom-carousel.component';
 import { FormsModule } from '@angular/forms';
-
+import { providePrimeNG } from 'primeng/config';
+import Lara from '@primeng/themes/lara';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,14 @@ import { FormsModule } from '@angular/forms';
     RatingModule,
   ],
   providers: [
-    //provideClientHydration()
+      providePrimeNG({
+      theme: {
+        preset: 'lara',  // string, lowercase, matches folder name
+        options: {
+          darkModeSelector: '.my-app-dark',
+        },
+      },
+    }),
   ],
   bootstrap: [AppComponent]
 })

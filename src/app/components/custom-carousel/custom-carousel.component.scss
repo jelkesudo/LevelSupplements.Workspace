@@ -1,9 +1,23 @@
+::ng-deep .custom-carousel svg:not(.no-carousel-style svg) {
+  width: 36px;
+  height: 36px;
+  fill: #444;             
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 50%;    
+  padding: 6px;
+  background: #f9f9f9;    
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  color: black;
+}
 
-::ng-deep .p-carousel .p-carousel-prev,
-::ng-deep .p-carousel .p-carousel-next {
-  background: #000;
-  color: #fff;
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+::ng-deep .custom-carousel svg:not(.no-carousel-style svg):hover {
+  fill: #1976d2;       
+  background: #ffffff;    
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+::ng-deep .custom-carousel svg:not(.no-carousel-style svg):active {
+  transform: scale(0.95); 
 }

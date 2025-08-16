@@ -2,8 +2,10 @@
 <section class="hero-section"></section>
 <app-fade-carousel [images]="carouselImages"></app-fade-carousel>
 
+<div class="w-80 mx-auto">
+  <h3 class="ps-5">NAJPRODAVANIJI PROIZVODI</h3>
 <app-custom-carousel [products]="products"></app-custom-carousel>
-
+</div>
 
 <app-promo-banner
   [imageSrc]="'images/SEJK.png'"
@@ -47,5 +49,24 @@
   [buttonLink]="'/proizvodi'"
   [reverseOrder]="false"
 ></app-promo-banner>
+<div class="recommended-container">
+        <div class="person-card">
+          <img src="images/ROZAL.png" alt="MARCIN ROZASKI" class="person-image">
+          <div class="person-overlay">
+            <h3>MARCIN ROZASKI</h3>
+            <p>Software Engineer at XYZ Company. Passionate about coding and design.</p>
+          </div>
+        </div>
+        
+        <div class="recommended-banner">PREPORUČILI</div>
+        
+        <div class="person-card">
+          <img src="images/MATERLA.png" alt="MICHAŁ MATERIA" class="person-image">
+          <div class="person-overlay">
+            <h3>MICHAŁ MATERIA</h3>
+            <p>Software Engineer at XYZ Company. Passionate about coding and design.</p>
+          </div>
+        </div>
 
+    </div>
 
