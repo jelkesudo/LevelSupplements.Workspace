@@ -1,0 +1,63 @@
+<div class="page-layout pt-100">
+    <nav class="breadcrumbs">
+        <div class="w-80 mx-auto">
+            <a routerLink="/">Home</a> -
+            <a routerLink="/proizvodi">Proizvodi</a>
+        </div>
+    </nav>
+    <div class="w-80 mx-auto">
+        <div class="header-content">
+        <aside class="filters">
+            <h3>FILTER</h3>
+
+            <div class="filter-group">
+            <label>UKUS</label>
+            <select>
+                <option value="">Svi</option>
+            </select>
+            </div>
+
+            <div class="filter-group">
+            <label>GRAMAŽA</label>
+            <select>
+                <option value="">Sve</option>
+            </select>
+            </div>
+        </aside>
+
+        <section class="content">
+        
+            <h1>
+            SUPREME WHEY DONOSI VIŠE OD PROTEINA - DONOSI NOVI STANDARD
+            </h1>
+
+            <p class="intro">
+            <strong>Novi IHS Supreme Whey</strong> donosi čisti koncentrat proteina sa unapređenim sastavom - 
+            <strong>više proteina, manje masti i ugljenih hidrata.</strong> 
+            Zahvaljujući najnovijoj tehnologiji i dodatku <strong>DigeZyme®</strong> enzima, Supreme Whey se
+            savršeno rastvara, <strong>lako vari</strong> i pruža vrhunski ukus u svakoj meri.
+            </p>
+
+            <div class="header-row">
+            <p class="total">Ukupno {{products.length}} proizvoda.</p>
+            <div class="sort">
+                <label>Sortiraj po:</label>
+                <select>
+                <option value="">Default</option>
+                </select>
+            </div>
+            </div>
+
+            
+        </section>
+    </div>
+    <div class="product-grid mx-auto">
+        <app-product-card 
+            *ngFor="let product of products"
+            [product]="product"
+            (cardClick)="goToProductDetails()">
+        </app-product-card>
+    </div>
+    </div>
+    
+</div>

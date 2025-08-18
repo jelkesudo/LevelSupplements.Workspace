@@ -1,7 +1,12 @@
 <!-- Hero Section -->
-<section class="hero-section"></section>
-<app-fade-carousel [images]="carouselImages"></app-fade-carousel>
+<section class="hero-section" ></section>
 
+<app-fade-carousel [images]="carouselImages" (click)="goToProizvodi()"></app-fade-carousel>
+<div class="w-100">
+  <div class="w-25 proizvodi-btn mx-auto text-center">
+    <button class="btn btn-dark-level" (click)="goToProizvodi()">POGLEDAJ SVE PROIZVODE</button>
+  </div>
+</div>
 <div class="w-80 mx-auto">
   <h3 class="ps-5">NAJPRODAVANIJI PROIZVODI</h3>
 <app-custom-carousel [products]="products"></app-custom-carousel>

@@ -2,7 +2,13 @@
 .hero-section {
     padding-top: 80px;
 }
-
+.proizvodi-btn{
+  padding: 20px 0px;
+  button{
+    width: 100%;
+    font-size: 1.5rem;
+  }
+}
 @media screen and (max-width: 770px) {
     .hero-section {
         .hero-text-upper{

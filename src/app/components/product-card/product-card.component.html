@@ -1,0 +1,18 @@
+<div class="card-product">
+    <div class="image-card" (click)="onClick()">
+        <img [src]="product.imageUrl" [alt]="product.name" />
+    </div>
+
+  <div class="card-content">
+    <h5 (click)="onClick()">{{ product.name }} {{ product.weight }}</h5>
+    <p class="flavor" (click)="goToPreset($event, product.flavor)">{{ product.flavor }}</p>
+    <div class="d-flex justify-content-between">
+        <div class="rating">
+        <span *ngFor="let star of [1,2,3,4,5]" 
+                [class.filled]="star <= product.rating">★</span>
+        </div>
+        <p class="price">{{ product.price | currency:'RSD ':'symbol':'1.0-0' }}</p>
+    </div>
+    
+  </div>
+</div>

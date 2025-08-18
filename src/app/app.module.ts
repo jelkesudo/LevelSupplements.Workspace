@@ -23,6 +23,9 @@ import { FormsModule } from '@angular/forms';
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeng/themes/lara';
 import { CustomInfiniteCarouselComponent } from './components/custom-infinite-carousel/custom-infinite-carousel.component';
+import { ProductListComponent } from './pages/product-list/product-list.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +40,9 @@ import { CustomInfiniteCarouselComponent } from './components/custom-infinite-ca
     BannerWithPictureComponent,
     CustomCarouselComponent,
     CustomInfiniteCarouselComponent,
+    ProductListComponent,
+    ProductCardComponent,
+    ProductDetailComponent,
   ],
   imports: [
     FormsModule,

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PromoBannerComponent } from '../../components/promo-banner/promo-banner.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,6 +8,9 @@ import { PromoBannerComponent } from '../../components/promo-banner/promo-banner
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
+  constructor(private router: Router) {}
+
+
   carouselImages = [
     { src: 'images/High_Kick_start.png', alt: 'Image 1' },
     { src: 'images/PREVLAKE_6.webp', alt: 'Image 1' },
@@ -36,4 +40,7 @@ itemsFill = [
     { src: 'images/recept.png', alt: "slika" },
     { src: 'images/recept.png', alt: "slika" },
   ];
+  goToProizvodi() {
+    this.router.navigate(['/proizvodi']);
+  }
 }
