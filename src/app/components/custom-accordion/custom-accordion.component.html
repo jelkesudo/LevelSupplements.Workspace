@@ -8,7 +8,7 @@
     </div>
 
     <div class="accordion-content" [class.open]="openedIndex === i">
-      <p>{{ item.description }}</p>
+      <p [innerHtml]="item.description"></p>
     </div>
   </div>
 </div>

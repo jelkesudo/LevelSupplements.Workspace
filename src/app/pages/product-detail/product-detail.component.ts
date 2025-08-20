@@ -32,11 +32,40 @@ export class ProductDetailComponent {
     { name: 'KOKOS', color: '#f8f8f8' },
     { name: 'KREM KOKOS I BADEM', color: '#f5b7b1' }
   ];
+  specs = [
+    { text: 'Potpuno ', bold: 'nova formula' },
+    { bold: '22g proteina', text: ' po porciji od 30g' },
+    { text: 'Manje od ', bold: '1g laktoze', text2: ' na 100g proizvoda' },
+    { bold: '100mg DigeZym', text: ' ® enzima po porciji' },
+    { bold: 'Bez glutena' },
+    { text: 'Laka ', bold: 'rastovljivost' },
+    { bold: 'Laboratorijski', text: ' potvrđeno' }
+  ];
   selectedFlavor: string | null = null;
   selectedPackage = this.packages[0];
   quantity = 1;
   accordionData = [
-    { title: 'Opis proizvoda', description: 'Ovo je detaljan opis proizvoda...' },
+    { title: 'Opis proizvoda', 
+      description: `
+      U vreme kada se mnogi proizvođači okreću jeftinijim sirovinama kako bi smanjili troškove, 
+      <b>IHS je krenuo drugim putem</b> - prema višem levelu. 
+      <br><br>
+      <b>IHS Supreme Whey</b> je prošao kroz kompletnu transformaciju iz koje je stvoren 
+      najčistiji i najefikasniji protein koji je IHS ikada izgradio.
+      <br><br>
+      Nova formula IHS Supreme Whey proteina više nije mešavina, već čist vrhunski koncentrat, 
+      sa visokim % proteina, minimalnim sadržajem laktoze i besprekornom rastvorljivošću.
+      <br><br>
+      Zahvaljujući <b>BCAA amino kiselinama</b> prisutnim u Supreme Whey proteinu, možeš biti 
+      bez brige kada je u pitanju stanje tvog mišićnog tkiva. One efikasno podržavaju regeneraciju 
+      mišićnih vlakana nakon napornih i intenzivnih vežbi.
+      <br><br>
+      <b>Idealan za sve koji traže ozbiljne rezultate bez nepotrebnih dodataka.</b>
+      <br><br>
+      Ovakav kvalitet IHS je ostvario uz pažljivo birane proteine, laboratorijski testirane 
+      i razvijene u saradnji sa tehnolozima i sportistima.
+    `
+  },
     { title: 'Sastav', description: 'Sastojci: voda, šećer, limun...' },
     { title: 'Upotreba', description: 'Preporučena upotreba: 2 puta dnevno...' }
   ];

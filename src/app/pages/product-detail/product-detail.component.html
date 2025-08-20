@@ -26,18 +26,18 @@
             </div>
         </div>
         <div class="product-content">
-            <div class="product-name"><h1>IHS - SUPREME WHEY KINDER SURPRISE 750G</h1></div>
+            <div class="product-name"><h1>IHS - SUPREME WHEY</h1></div>
             <div class="price">{{formattedPrice}}</div>
             <div class="rating-container">
                 <p-rating class="custom-rating" [(ngModel)]="rating" [stars]="5" [readonly]="false" [ngStyle]="{'--rating-width': (rating / 5) * 100 + '%'}"></p-rating>
             </div>
             <div class="list-specs">
                 <ul>
-                    <li>Specifikacije</li>
-                    <li>nesto</li>
-                    <li>nesto</li>
-                    <li>nesto</li>
-                    <li>nesto</li>
+                    <li *ngFor="let s of specs">
+                        <ng-container *ngIf="s.text">{{ s.text }}</ng-container>
+                            <b *ngIf="s.bold">{{ s.bold }}</b>
+                        <ng-container *ngIf="s.text2">{{ s.text2 }}</ng-container>
+                    </li>
                 </ul>
             </div>
             <div class="flavors">
@@ -81,7 +81,7 @@
             </div>
 
             <div class="delivery">
-                <span>🚚 Dostava za 5-7 radnih dana</span>
+                <div><img src="images/delivery.png" alt="delivery"> Dostava za 5-7 radnih dana</div>
             </div>
             </div>
         </div>
