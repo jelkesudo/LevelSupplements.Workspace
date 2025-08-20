@@ -22,10 +22,12 @@ import { CustomCarouselComponent } from './components/custom-carousel/custom-car
 import { FormsModule } from '@angular/forms';
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeng/themes/lara';
+import { ToastModule } from 'primeng/toast';
 import { CustomInfiniteCarouselComponent } from './components/custom-infinite-carousel/custom-infinite-carousel.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +45,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
     ProductListComponent,
     ProductCardComponent,
     ProductDetailComponent,
+    CustomAccordionComponent,
   ],
   imports: [
     FormsModule,
@@ -55,11 +58,12 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
     CarouselModule,
     CardModule,
     RatingModule,
+    ToastModule,
   ],
   providers: [
       providePrimeNG({
       theme: {
-        preset: 'lara',  // string, lowercase, matches folder name
+        preset: 'lara',
         options: {
           darkModeSelector: '.my-app-dark',
         },

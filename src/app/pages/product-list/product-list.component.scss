@@ -1,23 +1,4 @@
 @import "../../../styles.scss";
-.page-layout {
-  display: flex;
-  flex-direction: column;
-}
-.breadcrumbs {
-    font-size: 0.8rem;
-    color: #666;
-    margin-bottom: 1.2rem;
-    width: 100%;
-    border-bottom: 1px solid #666;
-    a {
-      color: #666;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-}
 .header-content{
     display: flex;
     justify-content: space-around;

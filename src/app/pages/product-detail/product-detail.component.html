@@ -1,1 +1,92 @@
-<p>product-detail works!</p>
+<div class="page-layout pt-100">
+    <nav class="breadcrumbs">
+        <div class="w-80 mx-auto d-flex justify-content-start">
+            <a routerLink="/">Home</a> -
+            <a routerLink="/proizvodi"> Proizvodi</a> -
+            <p>Ime proizvoda</p>
+        </div>
+    </nav>
+    <div class="product">
+        <div class="image-with-caousel">
+            <div class="gallery-container">
+            <div class="main-image">
+                <img [src]="selectedImage" alt="Main image" />
+            </div>
+
+            <p-carousel *ngIf="images.length > 1" styleClass="custom-carousel" [value]="images" [numVisible]="5" [numScroll]="1" class="thumbnail-carousel" [showIndicators]="false" [responsiveOptions]="responsiveOptions">
+                <ng-template let-image pTemplate="item">
+                <img
+                    [src]="image.src"
+                    [alt]="image.alt"
+                    (click)="selectImage(image)"
+                    [class.selected]="image.src === selectedImage"
+                />
+                </ng-template>
+            </p-carousel>
+            </div>
+        </div>
+        <div class="product-content">
+            <div class="product-name"><h1>IHS - SUPREME WHEY KINDER SURPRISE 750G</h1></div>
+            <div class="price">{{formattedPrice}}</div>
+            <div class="rating-container">
+                <p-rating class="custom-rating" [(ngModel)]="rating" [stars]="5" [readonly]="false" [ngStyle]="{'--rating-width': (rating / 5) * 100 + '%'}"></p-rating>
+            </div>
+            <div class="list-specs">
+                <ul>
+                    <li>Specifikacije</li>
+                    <li>nesto</li>
+                    <li>nesto</li>
+                    <li>nesto</li>
+                    <li>nesto</li>
+                </ul>
+            </div>
+            <div class="flavors">
+                <p>Svi ukusi</p>
+                <ul>
+                    <li 
+                        *ngFor="let flavor of flavors"
+                        class="flavor-item"
+                        [class.active]="flavor.name === selectedFlavor"
+                        (click)="selectFlavor(flavor.name)">
+                        <span class="dot" [style.backgroundColor]="flavor.color"></span>
+                        {{ flavor.name }}
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="order-container">
+            <p class="label">Pakovanje:</p>
+
+            <div class="packages">
+                <div 
+                *ngFor="let pkg of packages" 
+                class="package" 
+                [class.active]="pkg === selectedPackage"
+                (click)="selectPackage(pkg)">
+                <div class="weight">{{ pkg.weight }}</div>
+                <div class="portions">{{ pkg.portions }}</div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="add-btn" (click)="addToCart()">
+                DODAJ U KORPU
+                </button>   
+
+                <div class="quantity">
+                <button (click)="decrement()">-</button>
+                <span>{{ quantity }}</span>
+                <button (click)="increment()">+</button>
+                </div>
+            </div>
+
+            <div class="delivery">
+                <span>🚚 Dostava za 5-7 radnih dana</span>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="harmonica-menu mt-5 mx-auto">
+        <app-custom-accordion [items]="accordionData"></app-custom-accordion>
+    </div>
+</div>
