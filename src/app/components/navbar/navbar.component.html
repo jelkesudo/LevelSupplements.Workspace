@@ -40,7 +40,10 @@
         </div>
         <div class="utility-panel">
           <ul>
-            <li><i class="fa-regular fa-user"></i></li>
+            <li (click)="onUserClick()">
+              <i class="fa-regular fa-user"></i>
+              <span *ngIf="isLoggedIn$ | async">{{ firstName }}</span>
+            </li>
             <li><i class="fa-solid fa-cart-shopping"></i></li>
           </ul>
         </div>

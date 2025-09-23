@@ -1,0 +1,27 @@
+<div class="login-center d-flex justify-content-center align-items-center">
+    <div class="logo-image"><img src="images/LevelSuplementiLogo.png" alt="login-logo"></div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <!-- Email -->
+  <div class="form-group">
+    <input type="email" formControlName="email" placeholder="Email" />
+    <ul class="error-list">
+      <li *ngFor="let err of getErrors('email')">{{ err }}</li>
+    </ul>
+  </div>
+
+  <div class="form-group">
+    <input type="password" formControlName="password" placeholder="Password" />
+    <ul class="error-list">
+      <li *ngFor="let err of getErrors('password')">{{ err }}</li>
+    </ul>
+  </div>
+
+  <button class="btn" type="submit" [disabled]="form.invalid">
+    Prijavite se
+  </button>
+
+  <p class="text-center">Nemate nalog? <a routerLink="/register">Registrujte se</a></p>
+</form>
+</div>
+

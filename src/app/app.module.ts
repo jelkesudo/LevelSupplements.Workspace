@@ -19,7 +19,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { RatingModule } from 'primeng/rating';
 import { CardModule } from 'primeng/card';
 import { CustomCarouselComponent } from './components/custom-carousel/custom-carousel.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeng/themes/lara';
 import { ToastModule } from 'primeng/toast';
@@ -28,6 +28,12 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { Client, API_BASE_URL } from '../app/services/services';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,10 +52,13 @@ import { CustomAccordionComponent } from './components/custom-accordion/custom-a
     ProductCardComponent,
     ProductDetailComponent,
     CustomAccordionComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
   ],
   imports: [
     FormsModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     RouterModule,
     NavbarComponent,
@@ -59,8 +68,11 @@ import { CustomAccordionComponent } from './components/custom-accordion/custom-a
     CardModule,
     RatingModule,
     ToastModule,
+    ReactiveFormsModule,
   ],
   providers: [
+    Client,
+    { provide: API_BASE_URL, useValue: 'http://localhost:5232' },
       providePrimeNG({
       theme: {
         preset: 'lara',
@@ -69,6 +81,8 @@ import { CustomAccordionComponent } from './components/custom-accordion/custom-a
         },
       },
     }),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideHttpClient(withFetch()),
   ],
   bootstrap: [AppComponent]
 })
