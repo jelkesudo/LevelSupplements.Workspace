@@ -40,11 +40,21 @@
         </div>
         <div class="utility-panel">
           <ul>
-            <li (click)="onUserClick()">
-              <i class="fa-regular fa-user"></i>
-              <span *ngIf="isLoggedIn$ | async">{{ firstName }}</span>
-            </li>
-            <li><i class="fa-solid fa-cart-shopping"></i></li>
+            <ng-container *ngIf="isLoggedIn$ | async; else loggedOut">
+            <i (click)="toggleMenu($event)" class="fa-regular fa-user cursor-pointer"></i>
+            <app-dropdown-menu
+              [items]="menuItems"
+              [top]="popupTop"
+              [left]="popupLeft"
+              [visible]="menuOpen"
+              (closed)="menuOpen = false">
+            </app-dropdown-menu>
+          </ng-container>
+
+          <ng-template #loggedOut>
+            <span class="cursor-pointer" (click)="onLoginClick()">Login</span>
+          </ng-template>
+            <li><i class="fa-solid fa-cart-shopping" (click)="toggleCart()"></i></li>
           </ul>
         </div>
       </div>

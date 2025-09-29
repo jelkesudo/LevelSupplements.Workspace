@@ -1,0 +1,39 @@
+<div class="cart-widget" [ngClass]="{ 'open': isOpen }">
+  <div class="header">
+    <h2>Your Cart</h2>
+    <button class="close-btn" (click)="onClose()">✕</button>
+  </div>
+
+  <div class="cart-items" *ngIf="items.length > 0; else emptyCart">
+    <div class="cart-item" *ngFor="let item of items">
+      <img [src]="item.imageUrl" [alt]="item.name" class="thumb" />
+
+      <div class="details">
+        <p class="name">{{ item.name }}</p>
+        <p class="variant">{{ item.flavor }} - {{ item.pack }}</p>
+        <p class="price">{{ item.unitPrice | currency:'RSD ':'symbol':'1.2-2' }}</p>
+
+        <div class="quantity">
+          <button (click)="updateQuantity(item, item.quantity - 1)">-</button>
+          <input type="number"
+                 [value]="item.quantity"
+                 (change)="updateQuantity(item, $any($event.target).value)" />
+          <button (click)="updateQuantity(item, item.quantity + 1)">+</button>
+        </div>
+      </div>
+
+      <button class="remove" (click)="removeItem(item)">🗑</button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="empty">Your cart is empty.</p>
+  </ng-template>
+
+  <div class="footer" *ngIf="items.length > 0">
+    <p>Total: <strong>{{ total | currency:'RSD ':'symbol':'1.2-2' }}</strong></p>
+    <button class="checkout">Plaćanje</button>
+  </div>
+</div>
+
+<div class="overlay-blur" *ngIf="isOpen" (click)="onClose()"></div>

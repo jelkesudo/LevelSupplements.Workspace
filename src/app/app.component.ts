@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private router: Router) {}
   title = 'LevelSupplements.Workspace';
+  isCartOpen = false;
 
+  openCart() {
+    this.isCartOpen = true;
+  }
   hideHeaderFooter(): boolean {
     const noLayoutRoutes = ['/login', '/register'];
     return noLayoutRoutes.includes(this.router.url);

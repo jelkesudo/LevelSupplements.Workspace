@@ -1,3 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar (cartOpened)="openCart()"></app-navbar>
+<app-cart-widget [isOpen]="isCartOpen" (close)="isCartOpen = false"></app-cart-widget>
 <router-outlet></router-outlet>
 <app-footer *ngIf="!hideHeaderFooter()"></app-footer>

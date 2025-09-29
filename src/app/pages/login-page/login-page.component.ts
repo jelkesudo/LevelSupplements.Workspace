@@ -9,7 +9,12 @@ import { Router } from '@angular/router';
   styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent {
-  constructor(private router:Router){}
+  constructor(private router:Router){
+    this.form.patchValue({
+    email: "moze@moize.bauws",
+    password: "MyStrongPassword123!"
+  });
+  }
 private fb = inject(FormBuilder);
   private auth = inject(AuthService);
 
@@ -45,7 +50,6 @@ private fb = inject(FormBuilder);
 
     this.auth.login(email!, password!).subscribe({
       next: () => {
-        console.log('Login success');
         this.router.navigate([""]);
       },
       error: (err) => {
@@ -53,4 +57,5 @@ private fb = inject(FormBuilder);
       }
     });
   }
+  
 }

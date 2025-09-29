@@ -37,7 +37,9 @@ a{
   justify-content: center;
   align-items: center;
 }
-
+.cursor-pointer{
+  cursor: pointer;
+}
 .fade-in {
     animation: fadeIn 0.5s ease-in forwards;
 }
@@ -122,8 +124,120 @@ a{
 ::ng-deep .custom-carousel svg:not(.no-carousel-style svg):active {
   transform: scale(0.95); 
 }
+:host ::ng-deep {
+  /* === Input box === */
+  .p-multiselect {
+    border: 1px solid $purple !important;
+    border-radius: 6px;
+    background: #fff !important;
+    min-height: 42px;
 
+    .p-multiselect-label {
+      color: #000 !important;
+    }
+
+    .p-multiselect-overlay {
+      background: #fff !important;
+      color: #000 !important;
+    }
+  }
+
+  /* === Dropdown panel === */
+  .p-multiselect-panel {
+    background: #fff !important;
+    border: 1px solid $purple !important;
+    border-radius: 6px;
+    color: #000 !important;
+
+    .p-multiselect-items {
+      background: #fff !important;
+    }
+  }
+
+  /* === Option rows (fix alignment) === */
+  .p-multiselect-item,
+  .p-multiselect-option {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem; // space between checkbox and label
+    padding: 0.4rem 0.75rem !important;
+    font-size: 0.95rem;
+    line-height: 1.4rem;
+    color: $black !important;
+
+    span {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      line-height: 1.4rem;
+    }
+
+    .p-checkbox {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  /* === Hover/focus state === */
+  .p-multiselect-option:not(.p-multiselect-option-selected):not(.p-disabled).p-focus {
+    background: $paleRose !important;
+    color: $black !important;
+  }
+
+  /* === Checkbox base === */
+  .p-checkbox .p-checkbox-box {
+    border: 2px solid $purple !important;
+    border-radius: 4px !important;
+    width: 18px;
+    height: 18px;
+    background: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin: 0 !important; // keep aligned with text
+  }
+
+  /* === Checked state === */
+  .p-checkbox.p-highlight .p-checkbox-box {
+    background: $purple !important;
+    border-color: $purple !important;
+
+    .p-checkbox-icon {
+      color: #fff !important;
+      font-size: 12px;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+}
+/* Hide arrows in Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows in Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 //forms
+input {
+      padding: 0.75rem 1rem;
+      border: 3px solid $paleRose;
+      border-color: darken($paleRose, 10%);
+      border-radius: 8px;
+      background: transparent;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba($paleRose, 0.3);
+      }
+}
 .error-list {
   list-style: none;
   padding: 0;

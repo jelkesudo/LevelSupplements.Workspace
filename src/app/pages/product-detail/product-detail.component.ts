@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { formatPrice } from '../../shared/helper';
-import { MessageService } from 'primeng/api';
+import { Client, FlavorDto, PackDto, ProductReadDto, ProductVariantDto } from '../../services/services';
+import { ActivatedRoute } from '@angular/router';
+import { CartService, CartItem } from '../../services/cart.service'; // ✅ import your service
+
 interface ImageItem {
   src: string;
   alt: string;
@@ -11,106 +14,124 @@ interface ImageItem {
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-
 export class ProductDetailComponent {
+  product!: ProductReadDto;
+  PORTION_SIZE_GRAMS = 30;
+
   images: ImageItem[] = [];
   selectedImage: string = '';
   responsiveOptions: any[] | undefined;
-  rating: number = Math.round(2.5);
-  packages = [
-    { weight: '30g', portions: '1 PORCIJA' },
-    { weight: '750g', portions: '25 PORCIJA' },
-    { weight: '2000g', portions: '66 PORCIJA' }
-  ];
-  flavors = [
-    { name: 'UKUS DETINJSTVA', color: '#d9a066' },
-    { name: 'BELA ČOKOLADA I JAGODA', color: '#e74c3c' },
-    { name: 'ČOKOLADA', color: '#3b2f2f' },
-    { name: 'KOLAČIĆI', color: '#e67e22' },
-    { name: 'SLADOLED VANILA', color: '#f3e5ab' },
-    { name: 'TIRAMISU', color: '#a1887f' },
-    { name: 'KOKOS', color: '#f8f8f8' },
-    { name: 'KREM KOKOS I BADEM', color: '#f5b7b1' }
-  ];
-  specs = [
-    { text: 'Potpuno ', bold: 'nova formula' },
-    { bold: '22g proteina', text: ' po porciji od 30g' },
-    { text: 'Manje od ', bold: '1g laktoze', text2: ' na 100g proizvoda' },
-    { bold: '100mg DigeZym', text: ' ® enzima po porciji' },
-    { bold: 'Bez glutena' },
-    { text: 'Laka ', bold: 'rastovljivost' },
-    { bold: 'Laboratorijski', text: ' potvrđeno' }
-  ];
-  selectedFlavor: string | null = null;
-  selectedPackage = this.packages[0];
+  rating: number = 0;
+
+  variants: ProductVariantDto[] = [];
+  flavors: FlavorDto[] = [];
+  packsForFlavor: PackDto[] = [];
+
+  selectedFlavorId?: string;
+  selectedPackId?: string;
+  selectedVariant?: ProductVariantDto;
+
   quantity = 1;
+
+  @Output() cartOpened = new EventEmitter<void>();
+
   accordionData = [
-    { title: 'Opis proizvoda', 
-      description: `
-      U vreme kada se mnogi proizvođači okreću jeftinijim sirovinama kako bi smanjili troškove, 
-      <b>IHS je krenuo drugim putem</b> - prema višem levelu. 
-      <br><br>
-      <b>IHS Supreme Whey</b> je prošao kroz kompletnu transformaciju iz koje je stvoren 
-      najčistiji i najefikasniji protein koji je IHS ikada izgradio.
-      <br><br>
-      Nova formula IHS Supreme Whey proteina više nije mešavina, već čist vrhunski koncentrat, 
-      sa visokim % proteina, minimalnim sadržajem laktoze i besprekornom rastvorljivošću.
-      <br><br>
-      Zahvaljujući <b>BCAA amino kiselinama</b> prisutnim u Supreme Whey proteinu, možeš biti 
-      bez brige kada je u pitanju stanje tvog mišićnog tkiva. One efikasno podržavaju regeneraciju 
-      mišićnih vlakana nakon napornih i intenzivnih vežbi.
-      <br><br>
-      <b>Idealan za sve koji traže ozbiljne rezultate bez nepotrebnih dodataka.</b>
-      <br><br>
-      Ovakav kvalitet IHS je ostvario uz pažljivo birane proteine, laboratorijski testirane 
-      i razvijene u saradnji sa tehnolozima i sportistima.
-    `
-  },
+    { title: 'Opis proizvoda', description: 'Detaljan opis proizvoda…' },
     { title: 'Sastav', description: 'Sastojci: voda, šećer, limun...' },
     { title: 'Upotreba', description: 'Preporučena upotreba: 2 puta dnevno...' }
   ];
+
+  constructor(
+    private client: Client,
+    private route: ActivatedRoute,
+    private cartService: CartService
+  ) {}
+
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.client.products2(id).subscribe({
+        next: (res) => {
+          this.product = res;
+          this.mapProductData(res);
+        },
+        error: (err) => console.error('Error loading product', err)
+      });
+    }
+
     this.responsiveOptions = [
-            {
-                breakpoint: '1400px',
-                numVisible: 2,
-                numScroll: 1
-            },
-            {
-                breakpoint: '1199px',
-                numVisible: 3,
-                numScroll: 1
-            },
-            {
-                breakpoint: '767px',
-                numVisible: 2,
-                numScroll: 1
-            },
-            {
-                breakpoint: '575px',
-                numVisible: 2,
-                numScroll: 1
-            }
-        ]
-    this.images = [
-      { src: '/images/carusel/2.png', alt: 'Image 1' },
-      { src: '/images/carusel/4.png', alt: 'Image 2' },
-      { src: '/images/carusel/6.png', alt: 'Image 3' },
-      { src: '/images/carusel/2.png', alt: 'Image 4' },
-      { src: '/images/carusel/2.png', alt: 'Image 5' },
-      { src: '/images/carusel/2.png', alt: 'Image 6' },
+      { breakpoint: '1400px', numVisible: 2, numScroll: 1 },
+      { breakpoint: '1199px', numVisible: 3, numScroll: 1 },
+      { breakpoint: '767px', numVisible: 2, numScroll: 1 },
+      { breakpoint: '575px', numVisible: 2, numScroll: 1 }
     ];
-    if (this.images.length > 0) {
-      this.selectedImage = this.images[0].src;
+  }
+
+  private mapProductData(product: ProductReadDto) {
+    this.variants = product.variants ?? [];
+
+    // Distinct flavors
+    const flavorMap = new Map<string, FlavorDto>();
+    this.variants.forEach(v => {
+      if (v.flavor?.id) {
+        flavorMap.set(v.flavor.id, v.flavor);
+      }
+    });
+    this.flavors = Array.from(flavorMap.values());
+
+    // Default: first flavor with stock
+    const firstAvailableFlavor = this.flavors.find(f =>
+      this.variants.some(v => v.flavor?.id === f.id && (v.quantityInStock || 0) > 0)
+    );
+    if (firstAvailableFlavor) {
+      this.onSelectFlavor(firstAvailableFlavor.id!);
+    }
+
+    // TODO: Replace with real image URLs when backend serves them
+    this.images = [
+      { src: '/images/carusel/2.png', alt: 'Main image' },
+      { src: '/images/carusel/4.png', alt: 'Second image' }
+    ];
+    this.selectedImage = this.images[0].src;
+  }
+
+  onSelectFlavor(flavorId: string) {
+    if (this.isFlavorDisabled(flavorId)) return;
+
+    this.selectedFlavorId = flavorId;
+
+    const packs = this.variants.filter(v => v.flavor?.id === flavorId);
+    const packsMap = new Map<string, PackDto>();
+    packs.forEach(v => {
+      if (v.pack?.id) packsMap.set(v.pack.id, v.pack);
+    });
+    this.packsForFlavor = Array.from(packsMap.values());
+
+    this.selectedPackId = undefined;
+    this.selectedVariant = undefined;
+  }
+
+  onSelectPack(packId: string) {
+    if (this.isPackDisabled(packId)) return;
+
+    this.selectedPackId = packId;
+    this.selectedVariant = this.variants.find(
+      v => v.flavor?.id === this.selectedFlavorId && v.pack?.id === packId
+    );
+    this.quantity = 1;
+  }
+
+  onQuantityChange() {
+    if (this.quantity < 1) this.quantity = 1;
+    if (this.quantity > (this.selectedVariant?.quantityInStock ?? 1)) {
+      this.quantity = this.selectedVariant?.quantityInStock ?? 1;
     }
   }
 
-  selectPackage(pkg: any) {
-    this.selectedPackage = pkg;
-  }
-
   increment() {
-    this.quantity++;
+    if (this.quantity < (this.selectedVariant?.quantityInStock ?? 1)) {
+      this.quantity++;
+    }
   }
 
   decrement() {
@@ -120,21 +141,60 @@ export class ProductDetailComponent {
   }
 
   addToCart() {
+    if (!this.selectedVariant) return;
+
+    const unitPrice = this.selectedVariant.prices?.[0]?.price ?? 0;
+
     const cartItem = {
-      package: this.selectedPackage,
+      productId: this.product.id,
+      variantId: this.selectedVariant.id!,
+      name: this.product.name,
+      flavor: this.selectedVariant.flavor?.name,
+      pack: `${this.selectedVariant.pack?.size}${this.selectedVariant.pack?.unit}`,
+      unitPrice,
       quantity: this.quantity,
-      flavor: this.selectedFlavor
+      imageUrl: this.images[0]?.src,
+      stock: this.selectedVariant.quantityInStock ?? 0 
     };
-    console.log('Dodato u korpu:', cartItem);
+
+    this.cartService.addToCart(cartItem);
+
+    this.cartOpened.emit();
   }
+
   selectImage(img: ImageItem) {
     this.selectedImage = img.src;
   }
-  selectFlavor(flavor: string) {
-    this.selectedFlavor = flavor;
-    console.log('Izabrani ukus:', this.selectedFlavor);
-  }
+
   get formattedPrice(): string {
-      return formatPrice(2000);
+    const price = this.selectedVariant?.prices?.[0]?.price ?? 0;
+    return formatPrice(price);
+  }
+
+  getPortions(pack: PackDto): string {
+    const grams = pack.size ?? 0;
+    if (!grams) return '0 porcija';
+    const portions = Math.floor(grams / this.PORTION_SIZE_GRAMS);
+    return `${portions} porcija`;
+  }
+
+  get isAddToCartDisabled(): boolean {
+    if (!this.selectedVariant) return true;
+    return (this.selectedVariant.quantityInStock ?? 0) < this.quantity;
+  }
+
+  isFlavorDisabled(flavorId: string): boolean {
+    return !this.variants.some(
+      v => v.flavor?.id === flavorId && (v.quantityInStock || 0) > 0
+    );
+  }
+
+  isPackDisabled(packId: string): boolean {
+    return !this.variants.some(
+      v =>
+        v.flavor?.id === this.selectedFlavorId &&
+        v.pack?.id === packId &&
+        (v.quantityInStock || 0) > 0
+    );
   }
 }

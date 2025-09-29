@@ -34,6 +34,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { Client, API_BASE_URL } from '../app/services/services';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CartWidgetComponent } from './components/cart-widget/cart-widget.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +59,9 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     CustomAccordionComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    DropdownMenuComponent,
+    NavbarComponent,
+    CartWidgetComponent
   ],
   imports: [
     FormsModule,
@@ -61,7 +69,6 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    NavbarComponent,
     CommonModule,
     ButtonModule,
     CarouselModule,
@@ -69,6 +76,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     RatingModule,
     ToastModule,
     ReactiveFormsModule,
+    MultiSelectModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     Client,

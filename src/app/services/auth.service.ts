@@ -4,9 +4,13 @@ import { BehaviorSubject } from 'rxjs';
 import { Client, AuthRequest, AuthResponse } from './services';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
-export interface DecodedToken {
-  firstName: string;
-  email: string;
+interface DecodedToken {
+  Id: string;
+  Email: string;
+  FirstName: string;
+  UseCases: string;
+  exp: number;
+  iat: number;
 }
 @Injectable({ providedIn: 'root' })
 
@@ -38,14 +42,18 @@ export class AuthService {
     return this.client.authPOST(req).pipe(
       tap((res: AuthResponse) => {
         if (this.isBrowser && res?.token) {
-          localStorage.setItem(this.tokenKey, res.token);
-          this.loggedIn$.next(true);
-          this.user$.next(jwtDecode<DecodedToken>(res.token));
+          this.setSession(res.token);
         }
       })
     );
   }
+  setSession(token: string) {
+    localStorage.setItem(this.tokenKey, token);
+    this.loggedIn$.next(true);
 
+    const decoded = jwtDecode<DecodedToken>(token);
+    this.user$.next(decoded);
+  }
   logout() {
     if (this.isBrowser) {
       localStorage.removeItem(this.tokenKey);
@@ -61,12 +69,11 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.isBrowser && this.hasToken();
   }
-
   isLoggedIn$Obs() {
     return this.loggedIn$.asObservable();
   }
   get firstName(): string | null {
-    return this.user$.value?.firstName ?? null;
+    return this.user$.value?.FirstName ?? null;
   }
   private hasToken(): boolean {
     return this.isBrowser && !!localStorage.getItem(this.tokenKey);

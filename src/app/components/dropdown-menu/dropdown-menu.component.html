@@ -1,0 +1,7 @@
+<div class="popup" *ngIf="visible" [ngStyle]="{ top: top, left: left }">
+  <ul>
+    <li *ngFor="let item of items" (click)="onItemClick(item.action)">
+      {{ item.label }}
+    </li>
+  </ul>
+</div>

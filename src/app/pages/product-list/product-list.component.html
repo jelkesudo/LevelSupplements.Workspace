@@ -7,24 +7,38 @@
     </nav>
     <div class="w-80 mx-auto">
         <div class="header-content">
-        <aside class="filters">
-            <h3>FILTER</h3>
+<aside class="filters">
+  <h3>FILTER</h3>
 
-            <div class="filter-group">
-            <label>UKUS</label>
-            <select>
-                <option value="">Svi</option>
-            </select>
-            </div>
+  <!-- Flavors -->
+  <div class="filter-group">
+    <label>UKUS</label>
+    <p-multiSelect
+      [options]="flavorOptions"
+      [(ngModel)]="selectedFlavors"
+      optionLabel="label"
+      optionValue="id"
+      placeholder="Svi ukusi"
+      display="chip"
+      (onChange)="applyFilters()">
+    </p-multiSelect>
+  </div>
 
-            <div class="filter-group">
-            <label>GRAMAŽA</label>
-            <select>
-                <option value="">Sve</option>
-            </select>
-            </div>
-        </aside>
 
+  <!-- Packs -->
+  <div class="filter-group">
+    <label>GRAMAŽA</label>
+    <p-multiSelect
+      [options]="packOptions"
+      [(ngModel)]="selectedPacks"
+      optionLabel="label"
+      optionValue="id"
+      placeholder="Sve gramaže"
+      display="chip"
+      (onChange)="applyFilters()">
+    </p-multiSelect>
+  </div>
+</aside>
         <section class="content">
         
             <h1>
@@ -55,7 +69,7 @@
         <app-product-card 
             *ngFor="let product of products"
             [product]="product"
-            (cardClick)="goToProductDetails()">
+            (cardClick)="goToProductDetails(product.id)">
         </app-product-card>
     </div>
     </div>
