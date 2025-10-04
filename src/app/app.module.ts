@@ -38,6 +38,8 @@ import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.
 import { MultiSelectModule } from 'primeng/multiselect';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartWidgetComponent } from './components/cart-widget/cart-widget.component';
+import { MessageService } from 'primeng/api';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { CartWidgetComponent } from './components/cart-widget/cart-widget.compon
     RegisterPageComponent,
     DropdownMenuComponent,
     NavbarComponent,
-    CartWidgetComponent
+    CartWidgetComponent,
+    LoaderComponent
   ],
   imports: [
     FormsModule,
@@ -81,6 +84,7 @@ import { CartWidgetComponent } from './components/cart-widget/cart-widget.compon
   ],
   providers: [
     Client,
+    MessageService,
     { provide: API_BASE_URL, useValue: 'http://localhost:5232' },
       providePrimeNG({
       theme: {

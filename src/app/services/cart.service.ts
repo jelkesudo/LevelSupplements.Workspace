@@ -1,6 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 export interface CartItem {
   productId: string | undefined;
@@ -20,7 +21,7 @@ export class CartService {
   private storageKey = 'cart';
   private isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private messageService: MessageService) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.loadCart();
   }
@@ -68,7 +69,7 @@ export class CartService {
         quantity: Math.min(item.quantity, stock)
       });
     }
-
+    this.messageService.add({ severity: 'success', summary: 'Dodato u korpu', detail: 'Uspešno dodato u korpu!', life: 3000 });
     this.saveCart();
   }
 
@@ -84,6 +85,7 @@ export class CartService {
 
   removeFromCart(variantId: string) {
     this.items = this.items.filter(i => i.variantId !== variantId);
+    this.messageService.add({ severity: 'warn', summary: 'Uklonjeno iz korpe', detail: 'Uspešno uklonjeno iz korpe!', life: 3000 });
     this.saveCart();
   }
 

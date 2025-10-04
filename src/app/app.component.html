@@ -1,4 +1,8 @@
+<p-toast position="top-center"></p-toast>
 <app-navbar (cartOpened)="openCart()"></app-navbar>
 <app-cart-widget [isOpen]="isCartOpen" (close)="isCartOpen = false"></app-cart-widget>
-<router-outlet></router-outlet>
+
+<app-loader></app-loader>
+
+<router-outlet (activate)="onRouteActivate($event)"></router-outlet>
 <app-footer *ngIf="!hideHeaderFooter()"></app-footer>

@@ -6,7 +6,7 @@
   height: 100dvh;
   width: 100%;
   background: $white;
-  z-index: 9999;
+  z-index: 9998;
   transition: right 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -38,8 +38,8 @@
       margin-bottom: 1rem;
 
       .thumb {
-        width: 60px;
-        height: 60px;
+        width: 100px;
+        height: 100px;
         object-fit: contain;
         margin-right: 1rem;
       }

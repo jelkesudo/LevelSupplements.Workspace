@@ -1,7 +1,7 @@
 <div class="cart-widget" [ngClass]="{ 'open': isOpen }">
   <div class="header">
-    <h2>Your Cart</h2>
-    <button class="close-btn" (click)="onClose()">✕</button>
+    <h2>Korpa</h2>
+    <button class="close-btn" (click)="onClose()">X</button>
   </div>
 
   <div class="cart-items" *ngIf="items.length > 0; else emptyCart">
@@ -11,7 +11,7 @@
       <div class="details">
         <p class="name">{{ item.name }}</p>
         <p class="variant">{{ item.flavor }} - {{ item.pack }}</p>
-        <p class="price">{{ item.unitPrice | currency:'RSD ':'symbol':'1.2-2' }}</p>
+        <p class="price">{{ item.unitPrice * item.quantity | currency:'RSD ':'symbol':'1.2-2' }}</p>
 
         <div class="quantity">
           <button (click)="updateQuantity(item, item.quantity - 1)">-</button>
@@ -22,12 +22,14 @@
         </div>
       </div>
 
-      <button class="remove" (click)="removeItem(item)">🗑</button>
+      <button class="remove" (click)="removeItem(item)">Ukloni</button>
     </div>
   </div>
 
   <ng-template #emptyCart>
-    <p class="empty">Your cart is empty.</p>
+    <div class="w-100 d-flex justify-content-center align-items-center">
+        <p class="empty pt-5">Vaša korpa je prazna.</p>
+    </div>
   </ng-template>
 
   <div class="footer" *ngIf="items.length > 0">

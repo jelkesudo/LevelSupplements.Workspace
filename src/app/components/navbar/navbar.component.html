@@ -22,15 +22,15 @@
         </div>
     
         <ul class="nav-links ms-3">
-          <li><a routerLink="/proizvodi">Proteini</a></li>
-          <li><a routerLink="/proizvodi">Kreatin</a></li>
-          <li><a routerLink="/proizvodi">Pre-Workout</a></li>
-          <li><a routerLink="/proizvodi">Post-Workout</a></li>
-          <li><a routerLink="/proizvodi">Aminokiseline</a></li>
-          <li><a routerLink="/proizvodi">Sagorevači masti</a></li>
-          <li><a routerLink="">Zdravlje</a></li>
-          <li><a routerLink="">O Nama</a></li>
-          <li><a routerLink="/kontakt">Kontakt</a></li>
+          <li><a [routerLink]="'/proizvodi'" [queryParams]="{ category: 'Proteini' }">Proteini</a></li>
+          <li><a [routerLink]="'/proizvodi'" [queryParams]="{ category: 'Kreatin' }">Kreatin</a></li>
+          <li><a [routerLink]="'/proizvodi'" [queryParams]="{ category: 'PreWorkout' }">Pre-Workout</a></li>
+          <li><a [routerLink]="'/proizvodi'" [queryParams]="{ category: 'PostWorkout' }">Post-Workout</a></li>
+          <li><a [routerLink]="'/proizvodi'" [queryParams]="{ category: 'Aminokiseline' }">Aminokiseline</a></li>
+          <li><a [routerLink]="'/proizvodi'" [queryParams]="{ category: 'SagorevaciMasti' }">Sagorevači masti</a></li>
+          <li><a [routerLink]="'/proizvodi'" [queryParams]="{ category: 'Zdravlje' }">Zdravlje</a></li>
+          <li><a [routerLink]="'/o-nama'">O Nama</a></li>
+          <li><a [routerLink]="'/kontakt'">Kontakt</a></li>
         </ul>
       </div>
       <div class="second-part text-purple">

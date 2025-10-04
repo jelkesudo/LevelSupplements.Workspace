@@ -14,6 +14,13 @@ export class AppComponent {
   openCart() {
     this.isCartOpen = true;
   }
+
+  onRouteActivate(component: any) {
+    if (component.cartOpened) {
+      component.cartOpened.subscribe(() => this.openCart());
+    }
+  }
+  
   hideHeaderFooter(): boolean {
     const noLayoutRoutes = ['/login', '/register'];
     return noLayoutRoutes.includes(this.router.url);

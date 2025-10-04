@@ -132,11 +132,12 @@ export class Client {
      * @param name (optional) 
      * @param sortBy (optional) 
      * @param sortDirection (optional) 
+     * @param categoryEnum (optional) 
      * @param perPage (optional) 
      * @param page (optional) 
      * @return OK
      */
-    products(name: string | undefined, sortBy: string | undefined, sortDirection: string | undefined, perPage: number | undefined, page: number | undefined): Observable<ProductListDtoPagedResponse> {
+    products(name: string | undefined, sortBy: string | undefined, sortDirection: string | undefined, categoryEnum: CategoryEnum | undefined, perPage: number | undefined, page: number | undefined): Observable<ProductListDtoPagedResponse> {
         let url_ = this.baseUrl + "/api/products?";
         if (name === null)
             throw new globalThis.Error("The parameter 'name' cannot be null.");
@@ -150,6 +151,10 @@ export class Client {
             throw new globalThis.Error("The parameter 'sortDirection' cannot be null.");
         else if (sortDirection !== undefined)
             url_ += "SortDirection=" + encodeURIComponent("" + sortDirection) + "&";
+        if (categoryEnum === null)
+            throw new globalThis.Error("The parameter 'categoryEnum' cannot be null.");
+        else if (categoryEnum !== undefined)
+            url_ += "CategoryEnum=" + encodeURIComponent("" + categoryEnum) + "&";
         if (perPage === null)
             throw new globalThis.Error("The parameter 'perPage' cannot be null.");
         else if (perPage !== undefined)
@@ -266,11 +271,12 @@ export class Client {
      * @param name (optional) 
      * @param sortBy (optional) 
      * @param sortDirection (optional) 
+     * @param categoryEnum (optional) 
      * @param perPage (optional) 
      * @param page (optional) 
      * @return OK
      */
-    packs(name: string | undefined, sortBy: string | undefined, sortDirection: string | undefined, perPage: number | undefined, page: number | undefined): Observable<PackOptionDTOPagedResponse> {
+    packs(name: string | undefined, sortBy: string | undefined, sortDirection: string | undefined, categoryEnum: CategoryEnum2 | undefined, perPage: number | undefined, page: number | undefined): Observable<PackOptionDTOPagedResponse> {
         let url_ = this.baseUrl + "/api/packs?";
         if (name === null)
             throw new globalThis.Error("The parameter 'name' cannot be null.");
@@ -284,6 +290,10 @@ export class Client {
             throw new globalThis.Error("The parameter 'sortDirection' cannot be null.");
         else if (sortDirection !== undefined)
             url_ += "SortDirection=" + encodeURIComponent("" + sortDirection) + "&";
+        if (categoryEnum === null)
+            throw new globalThis.Error("The parameter 'categoryEnum' cannot be null.");
+        else if (categoryEnum !== undefined)
+            url_ += "CategoryEnum=" + encodeURIComponent("" + categoryEnum) + "&";
         if (perPage === null)
             throw new globalThis.Error("The parameter 'perPage' cannot be null.");
         else if (perPage !== undefined)
@@ -467,12 +477,51 @@ export interface IAuthResponse {
     token?: string | undefined;
 }
 
+export class CategoryDto implements ICategoryDto {
+    id?: string;
+    name?: string | undefined;
+
+    constructor(data?: ICategoryDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): CategoryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CategoryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        return data;
+    }
+}
+
+export interface ICategoryDto {
+    id?: string;
+    name?: string | undefined;
+}
+
 export class CreateUserDTO implements ICreateUserDTO {
     firstName?: string | undefined;
     lastName?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    roleId?: string;
 
     constructor(data?: ICreateUserDTO) {
         if (data) {
@@ -489,7 +538,6 @@ export class CreateUserDTO implements ICreateUserDTO {
             this.lastName = _data["lastName"];
             this.email = _data["email"];
             this.password = _data["password"];
-            this.roleId = _data["roleId"];
         }
     }
 
@@ -506,7 +554,6 @@ export class CreateUserDTO implements ICreateUserDTO {
         data["lastName"] = this.lastName;
         data["email"] = this.email;
         data["password"] = this.password;
-        data["roleId"] = this.roleId;
         return data;
     }
 }
@@ -516,7 +563,6 @@ export interface ICreateUserDTO {
     lastName?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    roleId?: string;
 }
 
 export class FlavorDto implements IFlavorDto {
@@ -762,6 +808,7 @@ export class ProductListDto implements IProductListDto {
     isActive?: boolean;
     packs?: PackDto[] | undefined;
     flavors?: FlavorDto[] | undefined;
+    minPrice?: number | undefined;
 
     constructor(data?: IProductListDto) {
         if (data) {
@@ -788,6 +835,7 @@ export class ProductListDto implements IProductListDto {
                 for (let item of _data["flavors"])
                     this.flavors!.push(FlavorDto.fromJS(item));
             }
+            this.minPrice = _data["minPrice"];
         }
     }
 
@@ -814,6 +862,7 @@ export class ProductListDto implements IProductListDto {
             for (let item of this.flavors)
                 data["flavors"].push(item ? item.toJSON() : undefined as any);
         }
+        data["minPrice"] = this.minPrice;
         return data;
     }
 }
@@ -825,6 +874,7 @@ export interface IProductListDto {
     isActive?: boolean;
     packs?: PackDto[] | undefined;
     flavors?: FlavorDto[] | undefined;
+    minPrice?: number | undefined;
 }
 
 export class ProductListDtoPagedResponse implements IProductListDtoPagedResponse {
@@ -893,6 +943,9 @@ export class ProductReadDto implements IProductReadDto {
     description?: string | undefined;
     isActive?: boolean;
     variants?: ProductVariantDto[] | undefined;
+    specifications?: SpecificationDto[] | undefined;
+    ratings?: RatingDto[] | undefined;
+    categories?: CategoryDto[] | undefined;
 
     constructor(data?: IProductReadDto) {
         if (data) {
@@ -913,6 +966,21 @@ export class ProductReadDto implements IProductReadDto {
                 this.variants = [] as any;
                 for (let item of _data["variants"])
                     this.variants!.push(ProductVariantDto.fromJS(item));
+            }
+            if (Array.isArray(_data["specifications"])) {
+                this.specifications = [] as any;
+                for (let item of _data["specifications"])
+                    this.specifications!.push(SpecificationDto.fromJS(item));
+            }
+            if (Array.isArray(_data["ratings"])) {
+                this.ratings = [] as any;
+                for (let item of _data["ratings"])
+                    this.ratings!.push(RatingDto.fromJS(item));
+            }
+            if (Array.isArray(_data["categories"])) {
+                this.categories = [] as any;
+                for (let item of _data["categories"])
+                    this.categories!.push(CategoryDto.fromJS(item));
             }
         }
     }
@@ -935,6 +1003,21 @@ export class ProductReadDto implements IProductReadDto {
             for (let item of this.variants)
                 data["variants"].push(item ? item.toJSON() : undefined as any);
         }
+        if (Array.isArray(this.specifications)) {
+            data["specifications"] = [];
+            for (let item of this.specifications)
+                data["specifications"].push(item ? item.toJSON() : undefined as any);
+        }
+        if (Array.isArray(this.ratings)) {
+            data["ratings"] = [];
+            for (let item of this.ratings)
+                data["ratings"].push(item ? item.toJSON() : undefined as any);
+        }
+        if (Array.isArray(this.categories)) {
+            data["categories"] = [];
+            for (let item of this.categories)
+                data["categories"].push(item ? item.toJSON() : undefined as any);
+        }
         return data;
     }
 }
@@ -945,6 +1028,9 @@ export interface IProductReadDto {
     description?: string | undefined;
     isActive?: boolean;
     variants?: ProductVariantDto[] | undefined;
+    specifications?: SpecificationDto[] | undefined;
+    ratings?: RatingDto[] | undefined;
+    categories?: CategoryDto[] | undefined;
 }
 
 export class ProductVariantDto implements IProductVariantDto {
@@ -1009,6 +1095,108 @@ export interface IProductVariantDto {
     pack?: PackDto;
     flavor?: FlavorDto;
     prices?: PriceDto[] | undefined;
+}
+
+export class RatingDto implements IRatingDto {
+    id?: string;
+    userId?: string;
+    rating?: number;
+    comment?: string | undefined;
+
+    constructor(data?: IRatingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userId = _data["userId"];
+            this.rating = _data["rating"];
+            this.comment = _data["comment"];
+        }
+    }
+
+    static fromJS(data: any): RatingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new RatingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userId"] = this.userId;
+        data["rating"] = this.rating;
+        data["comment"] = this.comment;
+        return data;
+    }
+}
+
+export interface IRatingDto {
+    id?: string;
+    userId?: string;
+    rating?: number;
+    comment?: string | undefined;
+}
+
+export class SpecificationDto implements ISpecificationDto {
+    id?: string;
+    name?: string | undefined;
+    value?: string | undefined;
+
+    constructor(data?: ISpecificationDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): SpecificationDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SpecificationDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+export interface ISpecificationDto {
+    id?: string;
+    name?: string | undefined;
+    value?: string | undefined;
+}
+
+export enum CategoryEnum {
+    Proteini = "Proteini",
+    PreWorkout = "PreWorkout",
+}
+
+export enum CategoryEnum2 {
+    Proteini = "Proteini",
+    PreWorkout = "PreWorkout",
 }
 
 export class ApiException extends Error {

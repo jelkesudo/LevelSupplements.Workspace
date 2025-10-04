@@ -1,1 +1,44 @@
-<p>register-page works!</p>
+<div class="login-center d-flex justify-content-center align-items-center">
+  <div class="logo-image">
+    <img src="images/LevelSuplementiLogo.png" alt="register-logo">
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input type="text" formControlName="firstName" placeholder="First Name" />
+      <ul class="error-list">
+        <li *ngFor="let err of getErrors('firstName')">{{ err }}</li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <input type="text" formControlName="lastName" placeholder="Last Name" />
+      <ul class="error-list">
+        <li *ngFor="let err of getErrors('lastName')">{{ err }}</li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <input type="email" formControlName="email" placeholder="Email" />
+      <ul class="error-list">
+        <li *ngFor="let err of getErrors('email')">{{ err }}</li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <input type="password" formControlName="password" placeholder="Password" />
+      <ul class="error-list">
+        <li *ngFor="let err of getErrors('password')">{{ err }}</li>
+      </ul>
+    </div>
+
+    <button class="btn" type="submit" [disabled]="form.invalid">
+      Registrujte se
+    </button>
+
+    <p class="text-center text-danger">{{ errorMessage }}</p>
+    <p class="text-center">
+      Već imate nalog? <a routerLink="/login">Prijavite se</a>
+    </p>
+  </form>
+</div>

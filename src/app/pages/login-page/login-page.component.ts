@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,7 +10,10 @@ import { Router } from '@angular/router';
   styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent {
-  constructor(private router:Router){
+  errorMessage: string = "";
+  constructor(
+    private router:Router,
+    private loaderService: LoaderService){
     this.form.patchValue({
     email: "moze@moize.bauws",
     password: "MyStrongPassword123!"
@@ -41,6 +45,8 @@ private fb = inject(FormBuilder);
   }
 
   onSubmit() {
+    this.errorMessage = "";
+    this.loaderService.showLoader();
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -51,9 +57,11 @@ private fb = inject(FormBuilder);
     this.auth.login(email!, password!).subscribe({
       next: () => {
         this.router.navigate([""]);
+        this.loaderService.hideLoader();
       },
       error: (err) => {
-        console.error('Login failed', err);
+        this.errorMessage = "Neispravan email/lozinka.";
+        this.loaderService.hideLoader();
       }
     });
   }

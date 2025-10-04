@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Client, ProductListDto, ProductReadDto } from '../../services/services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CategoryEnum, Client, ProductListDto, ProductReadDto } from '../../services/services';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-product-list',
@@ -17,42 +18,63 @@ export class ProductListComponent {
   selectedFlavors: string[] = [];
   selectedPacks: string[] = [];
 
-  constructor(private client: Client, private router: Router) {}
+  constructor(
+    private client: Client, 
+    private router: Router, 
+    private route:ActivatedRoute, 
+    private loaderService: LoaderService) {}
 
   ngOnInit() {
-    this.loadProducts();
+    this.route.queryParams.subscribe(params => {
+        const categoryParam = params['category'];
+        if (categoryParam) {
+          const category = categoryParam as keyof typeof CategoryEnum ;
+          this.loadProducts(CategoryEnum[category]);
+        } else {
+          this.loadProducts();
+        }
+    });
   }
 
-  loadProducts() {
-    this.client.products(undefined, "name", "ASC", 20, 1).subscribe(res => {
-      this.products = res.data ?? [];
+  loadProducts(category?: CategoryEnum | undefined) {
+    this.loaderService.showLoader();
 
-      // collect pack + flavor options
-      const allPacks = this.products.flatMap(p => p.packs ?? []);
-      const allFlavors = this.products.flatMap(p => p.flavors ?? []);
+    this.client.products(undefined, "name", "ASC", category, 20, 1).subscribe({
+      next: res => {
+        this.products = res.data ?? [];
 
-      this.packOptions = Array.from(
-        new Map(
-          allPacks.map(p => [
-            p.id,
-            { id: p.id ?? "", label: `${p.size} ${p.unit}` }
-          ])
-        ).values()
-      );
+        const allPacks = this.products.flatMap(p => p.packs ?? []);
+        const allFlavors = this.products.flatMap(p => p.flavors ?? []);
 
-      this.flavorOptions = Array.from(
-        new Map(
-          allFlavors.map(f => [
-            f.id,
-            { id: f.id ?? "", label: f.name ?? "" }
-          ])
-        ).values()
-      );
+        this.packOptions = Array.from(
+          new Map(
+            allPacks.map(p => [
+              p.id,
+              { id: p.id ?? "", label: `${p.size} ${p.unit}` }
+            ])
+          ).values()
+        );
+
+        this.flavorOptions = Array.from(
+          new Map(
+            allFlavors.map(f => [
+              f.id,
+              { id: f.id ?? "", label: f.name ?? "" }
+            ])
+          ).values()
+        );
+      },
+      error: err => {
+        console.error(err);
+      },
+      complete: () => {
+        this.loaderService.hideLoader();
+      }
     });
   }
 
   applyFilters() {
-    this.client.products(undefined, "name", "ASC", 20, 1).subscribe(res => {
+    this.client.products(undefined, "name", "ASC", undefined, 20, 1).subscribe(res => {
       let filtered = res.data ?? [];
 
       if (this.selectedPacks.length > 0) {

@@ -124,6 +124,23 @@ a{
 ::ng-deep .custom-carousel svg:not(.no-carousel-style svg):active {
   transform: scale(0.95); 
 }
+::ng-deep .p-inputtext,
+::ng-deep .p-dropdown,
+::ng-deep .p-calendar,
+::ng-deep .p-multiselect {
+  width: 100% !important;
+}
+.p-toast {
+  z-index: 9999 !important;
+}
+.p-toast .p-toast-message .p-toast-detail {
+  color: #000 !important;  /* black text */
+}
+
+.p-toast .p-toast-message .p-toast-summary {
+  font-weight: bold;
+  color: #000 !important;
+}
 :host ::ng-deep {
   /* === Input box === */
   .p-multiselect {
