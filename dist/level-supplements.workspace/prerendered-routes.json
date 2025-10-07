@@ -1,0 +1,10 @@
+{
+  "routes": [
+    "/",
+    "/kontakt",
+    "/login",
+    "/prodavnica",
+    "/proizvodi",
+    "/register"
+  ]
+}
