@@ -73,6 +73,7 @@ errorMessage: string = "";
       console.error(err);
       this.errorMessage = "Registracija nije uspela.";
       this.loaderService.hideLoader();
+      
     }
   });
 }
