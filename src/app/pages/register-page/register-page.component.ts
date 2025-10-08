@@ -63,7 +63,7 @@ errorMessage: string = "";
     password: this.form.value.password!
   } as CreateUserDTO;
 
-  this.client.users(dto).subscribe({
+  this.client.userPOST(dto).subscribe({
     next: () => {
       this.loaderService.hideLoader();
       this.messageService.add({ severity: 'success', summary: 'Uspešna registracija', detail: 'Možete se sada ulogovati!', life: 5000 });
@@ -73,7 +73,7 @@ errorMessage: string = "";
       console.error(err);
       this.errorMessage = "Registracija nije uspela.";
       this.loaderService.hideLoader();
-      
+
     }
   });
 }

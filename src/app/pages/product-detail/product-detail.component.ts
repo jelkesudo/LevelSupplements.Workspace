@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { formatPrice } from '../../shared/helper';
 import { Client, FlavorDto, PackDto, ProductReadDto, ProductVariantDto } from '../../services/services';
 import { ActivatedRoute } from '@angular/router';
 import { CartService, CartItem } from '../../services/cart.service'; // ✅ import your service
+import { LoaderService } from '../../services/loader.service';
+import { finalize } from 'rxjs/operators';
 
 interface ImageItem {
   src: string;
@@ -14,7 +16,7 @@ interface ImageItem {
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit{
   product!: ProductReadDto;
   PORTION_SIZE_GRAMS = 30;
 
@@ -44,29 +46,33 @@ export class ProductDetailComponent {
   constructor(
     private client: Client,
     private route: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService,
+    private loaderService: LoaderService,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.client.products2(id).subscribe({
-        next: (res) => {
-          this.product = res;
-          this.mapProductData(res);
-        },
-        error: (err) => console.error('Error loading product', err)
-      });
+ngOnInit(): void {
+  const id = this.route.snapshot.paramMap.get('id');
+  if (!id) return;
+
+  this.loaderService.showLoader();  // ✅ same as list
+
+  this.client.products2(id).subscribe({
+    next: (res) => {
+      this.product = res;
+      this.mapProductData(res);
+    },
+    error: (err) => {
+      console.error('Error loading product', err);
+    },
+    complete: () => {
+      this.loaderService.hideLoader();  // ✅ same as list
     }
-
-    this.responsiveOptions = [
-      { breakpoint: '1400px', numVisible: 2, numScroll: 1 },
-      { breakpoint: '1199px', numVisible: 3, numScroll: 1 },
-      { breakpoint: '767px', numVisible: 2, numScroll: 1 },
-      { breakpoint: '575px', numVisible: 2, numScroll: 1 }
-    ];
-  }
-
+  });
+}
+  // ngAfterViewInit(): void {
+  //   this.loaderService.showLoader();
+  // }
   private mapProductData(product: ProductReadDto) {
     this.variants = product.variants ?? [];
 

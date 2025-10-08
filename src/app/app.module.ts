@@ -40,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartWidgetComponent } from './components/cart-widget/cart-widget.component';
 import { MessageService } from 'primeng/api';
 import { LoaderComponent } from './components/loader/loader.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     DropdownMenuComponent,
     NavbarComponent,
     CartWidgetComponent,
-    LoaderComponent
+    LoaderComponent,
+    CheckoutComponent
   ],
   imports: [
     FormsModule,

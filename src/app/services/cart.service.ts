@@ -93,4 +93,12 @@ export class CartService {
     this.items = [];
     this.saveCart();
   }
+
+  getSubtotal(): number {
+    return this.items.reduce((sum, i) => sum + i.unitPrice * i.quantity, 0);
+  }
+
+  getItemCount(): number {
+    return this.items.reduce((sum, i) => sum + i.quantity, 0);
+  }
 }

@@ -3,7 +3,7 @@
     <div class="w-80 mx-auto d-flex justify-content-start">
       <a routerLink="/">Home</a> -
       <a routerLink="/proizvodi"> Proizvodi</a> -
-      <p>{{ product.name }}</p>
+      <p>{{ product?.name }}</p>
     </div>
   </nav>
 
@@ -33,7 +33,7 @@
     </div>
 
     <div class="product-content">
-      <div class="product-name"><h1>{{ product.name }}</h1></div>
+      <div class="product-name"><h1>{{ product?.name }}</h1></div>
       <div class="price">{{ formattedPrice }}</div>
 
       <div class="rating-container">

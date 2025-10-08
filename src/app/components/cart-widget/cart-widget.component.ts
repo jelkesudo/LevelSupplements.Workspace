@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CartItem, CartService } from '../../services/cart.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-widget',
@@ -10,7 +11,10 @@ export class CartWidgetComponent {
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private router:Router
+  ) {}
 
   get items(): CartItem[] {
     return this.cartService.getCart();
@@ -32,7 +36,12 @@ export class CartWidgetComponent {
     this.cartService.clearCart();
   }
 
+  goToCart() {
+    this.close.emit();
+    this.router.navigate(['/checkout']);
+  }
+
   onClose() {
-    this.close.emit(); // notify parent
+    this.close.emit();
   }
 }

@@ -34,7 +34,7 @@
 
   <div class="footer" *ngIf="items.length > 0">
     <p>Total: <strong>{{ total | currency:'RSD ':'symbol':'1.2-2' }}</strong></p>
-    <button class="checkout">Plaćanje</button>
+    <button class="checkout" (click)="goToCart()">Plaćanje</button>
   </div>
 </div>
 
