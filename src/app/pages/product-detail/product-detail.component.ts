@@ -2,9 +2,8 @@ import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@ang
 import { formatPrice } from '../../shared/helper';
 import { Client, FlavorDto, PackDto, ProductReadDto, ProductVariantDto } from '../../services/services';
 import { ActivatedRoute } from '@angular/router';
-import { CartService, CartItem } from '../../services/cart.service'; // ✅ import your service
+import { CartService } from '../../services/cart.service';
 import { LoaderService } from '../../services/loader.service';
-import { finalize } from 'rxjs/operators';
 
 interface ImageItem {
   src: string;
@@ -16,7 +15,7 @@ interface ImageItem {
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent implements OnInit{
+export class ProductDetailComponent implements OnInit {
   product!: ProductReadDto;
   PORTION_SIZE_GRAMS = 30;
 
@@ -51,28 +50,26 @@ export class ProductDetailComponent implements OnInit{
     private cdr: ChangeDetectorRef
   ) {}
 
-ngOnInit(): void {
-  const id = this.route.snapshot.paramMap.get('id');
-  if (!id) return;
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) return;
 
-  this.loaderService.showLoader();  // ✅ same as list
+    this.loaderService.showLoader();
 
-  this.client.products2(id).subscribe({
-    next: (res) => {
-      this.product = res;
-      this.mapProductData(res);
-    },
-    error: (err) => {
-      console.error('Error loading product', err);
-    },
-    complete: () => {
-      this.loaderService.hideLoader();  // ✅ same as list
-    }
-  });
-}
-  // ngAfterViewInit(): void {
-  //   this.loaderService.showLoader();
-  // }
+    this.client.products2(id).subscribe({
+      next: (res) => {
+        this.product = res;
+        this.mapProductData(res);
+      },
+      error: (err) => {
+        console.error('Error loading product', err);
+      },
+      complete: () => {
+        this.loaderService.hideLoader();
+      }
+    });
+  }
+
   private mapProductData(product: ProductReadDto) {
     this.variants = product.variants ?? [];
 
@@ -111,10 +108,18 @@ ngOnInit(): void {
     packs.forEach(v => {
       if (v.pack?.id) packsMap.set(v.pack.id, v.pack);
     });
-    this.packsForFlavor = Array.from(packsMap.values());
 
-    this.selectedPackId = undefined;
-    this.selectedVariant = undefined;
+    // ✅ sort packs by size ascending
+    this.packsForFlavor = Array.from(packsMap.values())
+      .sort((a, b) => (a.size ?? 0) - (b.size ?? 0));
+
+    // Auto-select the smallest pack if available
+    if (this.packsForFlavor.length > 0) {
+      this.onSelectPack(this.packsForFlavor[0].id!);
+    } else {
+      this.selectedPackId = undefined;
+      this.selectedVariant = undefined;
+    }
   }
 
   onSelectPack(packId: string) {
@@ -160,11 +165,10 @@ ngOnInit(): void {
       unitPrice,
       quantity: this.quantity,
       imageUrl: this.images[0]?.src,
-      stock: this.selectedVariant.quantityInStock ?? 0 
+      stock: this.selectedVariant.quantityInStock ?? 0
     };
 
     this.cartService.addToCart(cartItem);
-
     this.cartOpened.emit();
   }
 

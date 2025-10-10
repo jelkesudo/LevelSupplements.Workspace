@@ -21,13 +21,13 @@ export class CheckoutComponent  implements OnInit{
 
   cart: CartItem[] = [];
 
-  // order-side data
   paymentMethod: PaymentMethod = 'card';
-  shippingCost = 300; // flat rate for now
+  shippingCost = 300;
   promoCode = '';
   appliedPromo: { code: string; type: 'percent' | 'fixed'; amount: number } | null = null;
   shippingForm!: FormGroup;
-  // customer shipping info
+  submitted: boolean = false;
+
   shippingInfo: ShippingInfo = {
     fullName: '',
     email: '',
@@ -56,14 +56,12 @@ ngOnInit(): void {
     zip: ['', [Validators.required, Validators.pattern(/^[0-9]{4,10}$/)]],
   });
 
-  const token = localStorage.getItem("auth_token");
+  const token = localStorage?.getItem("auth_token");
 
   if (token) {
 
   this.client.me().subscribe({
     next: (user) => {
-      console.log("Current user:", user);
-
       this.shippingForm.patchValue({
         fullName: user.fullName ?? '',
         email: user.email ?? '',
@@ -75,11 +73,11 @@ ngOnInit(): void {
       console.error("Failed to fetch user profile", err);
     }
   });
-} else {
-  console.log("User not logged in, skipping profile fetch.");
 }
   this.loaderService.hideLoader();
-
+  this.shippingForm.valueChanges.subscribe(values => {
+    this.shippingInfo = values;
+  });
   this.refresh();
 }
 
@@ -128,38 +126,31 @@ ngOnInit(): void {
     this.refresh();
   }
 
-  applyPromo(): void {
-    // MVP demo logic. Replace with API call later.
-    const code = this.promoCode.trim().toUpperCase();
+  applyPromo() {
+  this.submitted = true;
 
-    if (!code) {
-      this.appliedPromo = null;
-      return;
-    }
-
-    // examples: WELCOME10 => 10% ; FIX500 => 500 RSD off
-    if (code === 'WELCOME10') {
-      this.appliedPromo = { code, type: 'percent', amount: 10 };
-    } else if (code === 'FIX500') {
-      this.appliedPromo = { code, type: 'fixed', amount: 500 };
-    } else {
-      this.appliedPromo = null; // invalid
-    }
+  // Example fake promo logic
+  if (this.promoCode === 'SAVE10') {
+    this.appliedPromo = { code: this.promoCode, type: 'percent', amount: 10 };
+  } else if (this.promoCode === 'DISCOUNT500') {
+    this.appliedPromo = { code: this.promoCode, type: 'fixed', amount: 500 };
+  } else {
+    this.appliedPromo = null;
   }
-
+}
   checkout(): void {
   if (!this.cart.length) {
     alert("Your cart is empty.");
     return;
   }
 
-  if (!this.shippingInfo.fullName || !this.shippingInfo.email || !this.shippingInfo.address) {
+  if (this.shippingForm.invalid) {
     alert("Please fill in all required shipping details.");
     return;
   }
 
   const payload = {
-    customer: this.shippingInfo,
+    customer: this.shippingForm.value, // 👈 use form values directly
     items: this.cart,
     promoCode: this.appliedPromo?.code ?? null,
     paymentMethod: this.paymentMethod,
@@ -172,14 +163,6 @@ ngOnInit(): void {
   };
 
   console.log('Checkout payload', payload);
-
-  // Example backend call
-  // this.client.createOrder(payload).subscribe({
-  //   next: (res) => {
-  //     console.log("Order success", res);
-  //     this.clearCart();
-  //   },
-  //   error: (err) => console.error("Order failed", err)
-  // });
 }
+
 }

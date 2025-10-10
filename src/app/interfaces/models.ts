@@ -56,3 +56,12 @@ export interface SpecificationDto {
     name?: string | undefined;
     value?: string | undefined;
 }
+
+export interface ProductDisplay {
+  id: string;
+  name: string;
+  description?: string;
+  flavorName: string;
+  flavorColor?: string;
+  packs: { id: string; label: string }[];
+}

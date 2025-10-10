@@ -34,9 +34,9 @@
 
     <div class="product-content">
       <div class="product-name"><h1>{{ product?.name }}</h1></div>
-      <div class="price">{{ formattedPrice }}</div>
+      <!-- <div class="price">{{ formattedPrice }}</div> -->
 
-      <div class="rating-container">
+      <div class="rating-container mt-2">
         <p-rating class="custom-rating"
                   [(ngModel)]="rating"
                   [stars]="5"
@@ -46,7 +46,7 @@
       </div>
 
       <!-- Flavor selection -->
-      <div class="flavors">
+      <div class="flavors mt-2">
         <p>Svi ukusi</p>
         <ul>
           <li *ngFor="let f of flavors"
@@ -61,7 +61,7 @@
       </div>
 
       <!-- Pack selection -->
-      <div class="order-container" *ngIf="selectedFlavorId">
+      <div class="order-container mt-2" *ngIf="selectedFlavorId">
         <p class="label">Pakovanje:</p>
 
         <div class="packages">

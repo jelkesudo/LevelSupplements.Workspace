@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { formatPrice } from '../../shared/helper';
 import { PackDto, ProductReadDto } from '../../services/services';
+import { ProductDisplay } from '../../interfaces/models';
 
 @Component({
   selector: 'app-product-card',
@@ -10,9 +11,9 @@ import { PackDto, ProductReadDto } from '../../services/services';
 })
 export class ProductCardComponent {
 
-  constructor(private router: Router) {}
+   constructor(private router: Router) {}
 
-  @Input() product!: ProductReadDto;
+  @Input() product!: ProductDisplay;
 
   @Output() cardClick = new EventEmitter<void>();
 
@@ -26,16 +27,16 @@ export class ProductCardComponent {
   }
 
   get flavorNames(): string {
-    return this.product.variants
-      ?.map(v => v.flavor?.name)
-      .filter(name => !!name)
-      .join(', ') ?? '';
+    return this.product.flavorName; // 👈 one flavor per card
   }
 
   get packSizes(): string {
-    return this.product.variants
-      ?.map(v => `${v.pack?.size} ${v.pack?.unit}`)
-      .filter(label => !!label)
+    return this.product.packs.join(', ');
+  }
+
+  get packLabels(): string {
+    return this.product?.packs
+      ?.map(pk => pk.label)
       .join(', ') ?? '';
   }
 }

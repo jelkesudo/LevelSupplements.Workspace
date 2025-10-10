@@ -18,11 +18,22 @@
         padding-left: 1rem;
         padding-top: 0.5rem;
     }
-  .flavor {
-    font-size: 0.9rem;
-    color: #555;
-  }
-
+    .flavor-container{
+          display: flex;
+          justify-content: start;
+           .flavor-dot {
+          display: inline-block;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          margin-right: 6px;
+          vertical-align: middle;
+        }
+      .flavor {
+        font-size: 0.9rem;
+        color: #555;
+      }
+    }
   .rating {
     margin: 0.5rem 0;
 

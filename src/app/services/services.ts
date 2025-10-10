@@ -714,6 +714,62 @@ export interface IFlavorDto {
     color?: string | undefined;
 }
 
+export class FlavorWithPacksDto implements IFlavorWithPacksDto {
+    id?: string;
+    name?: string | undefined;
+    color?: string | undefined;
+    packs?: PackDto[] | undefined;
+
+    constructor(data?: IFlavorWithPacksDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.color = _data["color"];
+            if (Array.isArray(_data["packs"])) {
+                this.packs = [] as any;
+                for (let item of _data["packs"])
+                    this.packs!.push(PackDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): FlavorWithPacksDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FlavorWithPacksDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["color"] = this.color;
+        if (Array.isArray(this.packs)) {
+            data["packs"] = [];
+            for (let item of this.packs)
+                data["packs"].push(item ? item.toJSON() : undefined as any);
+        }
+        return data;
+    }
+}
+
+export interface IFlavorWithPacksDto {
+    id?: string;
+    name?: string | undefined;
+    color?: string | undefined;
+    packs?: PackDto[] | undefined;
+}
+
 export class PackDto implements IPackDto {
     id?: string;
     size?: number;
@@ -912,7 +968,7 @@ export class ProductListDto implements IProductListDto {
     description?: string | undefined;
     isActive?: boolean;
     packs?: PackDto[] | undefined;
-    flavors?: FlavorDto[] | undefined;
+    flavors?: FlavorWithPacksDto[] | undefined;
     minPrice?: number | undefined;
 
     constructor(data?: IProductListDto) {
@@ -938,7 +994,7 @@ export class ProductListDto implements IProductListDto {
             if (Array.isArray(_data["flavors"])) {
                 this.flavors = [] as any;
                 for (let item of _data["flavors"])
-                    this.flavors!.push(FlavorDto.fromJS(item));
+                    this.flavors!.push(FlavorWithPacksDto.fromJS(item));
             }
             this.minPrice = _data["minPrice"];
         }
@@ -978,7 +1034,7 @@ export interface IProductListDto {
     description?: string | undefined;
     isActive?: boolean;
     packs?: PackDto[] | undefined;
-    flavors?: FlavorDto[] | undefined;
+    flavors?: FlavorWithPacksDto[] | undefined;
     minPrice?: number | undefined;
 }
 
@@ -1435,17 +1491,39 @@ function throwException(message: string, status: number, response: string, heade
 }
 
 function blobToText(blob: any): Observable<string> {
-    return new Observable<string>((observer: any) => {
-        if (!blob) {
-            observer.next("");
-            observer.complete();
-        } else {
-            let reader = new FileReader();
-            reader.onload = event => {
-                observer.next((event.target as any).result);
-                observer.complete();
-            };
-            reader.readAsText(blob);
-        }
-    });
+  return new Observable<string>((observer) => {
+    if (!blob) {
+      observer.next("");
+      observer.complete();
+      return;
+    }
+
+    if (typeof blob.text === "function") {
+      blob.text()
+        .then((text: string) => {
+          observer.next(text);
+          observer.complete();
+        })
+        .catch((err: unknown) => observer.error(err));
+      return;
+    }
+
+    if (typeof FileReader !== "undefined") {
+      const reader = new FileReader();
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        observer.next(event.target?.result as string);
+        observer.complete();
+      };
+      reader.onerror = (err) => observer.error(err);
+      reader.readAsText(blob);
+      return;
+    }
+
+    try {
+      observer.next(String(blob));
+      observer.complete();
+    } catch (e) {
+      observer.error("Cannot convert blob to text in this environment");
+    }
+  });
 }

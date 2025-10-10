@@ -35,7 +35,7 @@ export class AuthService {
       }
     }
   }
-
+  
   login(email: string, password: string) {
     const req = new AuthRequest({ email, password });
 

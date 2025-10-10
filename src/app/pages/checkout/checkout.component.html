@@ -9,10 +9,10 @@
     <section class="card items">
       <ng-container *ngIf="cart.length; else empty">
         <div class="item-row header">
-          <div class="col col-product">Item</div>
-          <div class="col col-price">Unit</div>
-          <div class="col col-qty">Qty</div>
-          <div class="col col-total">Total</div>
+          <div class="col col-product">Proizvod</div>
+          <div class="col col-price">Cena</div>
+          <div class="col col-qty">Količina</div>
+          <div class="col col-total">Ukupno</div>
           <div class="col col-actions"></div>
         </div>
 
@@ -22,8 +22,8 @@
             <div class="info">
               <div class="name">{{ item.name }}</div>
               <div class="meta">
-                <span *ngIf="item.flavor">Flavor: {{ item.flavor }}</span>
-                <span *ngIf="item.pack"> • Pack: {{ item.pack }}</span>
+                <span *ngIf="item.flavor">Ukus: {{ item.flavor }}</span>
+                <span *ngIf="item.pack"> • Pakovanje: {{ item.pack }}</span>
               </div>
             </div>
           </div>
@@ -43,114 +43,130 @@
           <div class="col col-total">{{ (item.unitPrice * item.quantity) | currency:'RSD ' }}</div>
 
           <div class="col col-actions">
-            <button class="link danger" (click)="remove(item.variantId)">Remove</button>
+            <button class="link danger" (click)="remove(item.variantId)">Ukloni</button>
           </div>
         </div>
       </ng-container>
 
       <ng-template #empty>
-        <div class="empty">Your cart is empty.</div>
+        <div class="empty">Vaša korpa je prazna.</div>
       </ng-template>
     </section>
 
     <!-- RIGHT: summary -->
     <aside class="card summary">
-      <h3>Order Summary</h3>
+      <h3>Vaša porudžbina</h3>
 
       <div class="row">
-        <span>Subtotal</span>
+        <span>Međuzbir</span>
         <strong>{{ subtotal | currency:'RSD ' }}</strong>
       </div>
 
       <div class="promo">
         <input
-          type="text"
-          placeholder="Promo code"
-          [(ngModel)]="promoCode"
-          name="promoCode"
+            type="text"
+            placeholder="Promo code"
+            [(ngModel)]="promoCode"
+            name="promoCode"
         />
-        <button class="apply" (click)="applyPromo()">Apply</button>
-        <div class="promo-status" *ngIf="promoCode && !appliedPromo">Invalid code</div>
-        <div class="promo-status ok" *ngIf="appliedPromo">
-          Applied: {{ appliedPromo.code }}
-          <span *ngIf="appliedPromo.type === 'percent'"> ({{ appliedPromo.amount }}%)</span>
-          <span *ngIf="appliedPromo.type === 'fixed'"> ({{ appliedPromo.amount | currency:'RSD ' }})</span>
+        <button class="apply" (click)="applyPromo()">Primeni</button>
+
+        <div class="promo-status" *ngIf="submitted && !appliedPromo">
+            Neispravan kod.
         </div>
-      </div>
+
+        <div class="promo-status ok" *ngIf="appliedPromo">
+            Primenjen kod: {{ appliedPromo.code }}
+            <span *ngIf="appliedPromo.type === 'percent'"> ({{ appliedPromo.amount }}%)</span>
+            <span *ngIf="appliedPromo.type === 'fixed'"> ({{ appliedPromo.amount | currency:'RSD ' }})</span>
+        </div>
+    </div>
 
       <div class="row">
-        <span>Discount</span>
+        <span>Popust</span>
         <strong>-{{ discount | currency:'RSD ' }}</strong>
       </div>
 
       <div class="row">
-        <span>Shipping</span>
+        <span>Dostava</span>
         <strong>{{ cart.length ? (shippingCost | currency:'RSD ') : ('0' | currency:'RSD ') }}</strong>
       </div>
 
       <hr />
 
       <div class="row total">
-        <span>Total</span>
+        <span>Ukupno za platiti</span>
         <strong>{{ total | currency:'RSD ' }}</strong>
       </div>
 
       <div class="pay-methods">
         <label>
           <input type="radio" [(ngModel)]="paymentMethod" name="payment" value="card" />
-          Pay by card
+          Kartica
         </label>
         <label>
           <input type="radio" [(ngModel)]="paymentMethod" name="payment" value="cod" />
-          Cash on delivery
+          Pouzećem
         </label>
       </div>
 
       <button class="cta" type="button" [disabled]="!cart.length || shippingForm.invalid" (click)="checkout()">
-        Confirm & Pay
+        Potvrdi i nastavi plaćanje
       </button>
     </aside>
   </div>
 
   <!-- BOTTOM: shipping info -->
   <section class="card shipping">
-    <h3>Shipping Information</h3>
+    <h3>Podaci o kupcu</h3>
    <form [formGroup]="shippingForm" (ngSubmit)="checkout()" class="form">
-        <!-- Full Name -->
-        <input type="text" placeholder="Full Name" formControlName="fullName" />
-        <div *ngIf="shippingForm.get('fullName')?.touched && shippingForm.get('fullName')?.invalid" class="error">
-            Full name is required (min 3 characters).
-        </div>
+  <!-- Full Name -->
+  <div class="form-field">
+    <input type="text" placeholder="Ime i Prezime" formControlName="fullName" />
+    <div class="error" *ngIf="shippingForm.get('fullName')?.touched && shippingForm.get('fullName')?.invalid">
+      Ime i prezime su obavezni.
+    </div>
+  </div>
 
-        <!-- Email -->
-        <input type="email" placeholder="Email" formControlName="email" />
-        <div *ngIf="shippingForm.get('email')?.touched && shippingForm.get('email')?.invalid" class="error">
-            Enter a valid email address.
-        </div>
+  <!-- Email -->
+  <div class="form-field">
+    <input type="email" placeholder="Email" formControlName="email" />
+    <div class="error" *ngIf="shippingForm.get('email')?.touched && shippingForm.get('email')?.invalid">
+      Ukucajte validnu email adresu.
+    </div>
+  </div>
 
-        <!-- Phone -->
-        <input type="text" placeholder="Phone" formControlName="phone" />
-        <div *ngIf="shippingForm.get('phone')?.touched && shippingForm.get('phone')?.invalid" class="error">
-            Phone must be 7-15 digits.
-        </div>
+  <!-- Phone -->
+  <div class="form-field">
+    <input type="text" placeholder="Telefon" formControlName="phone" />
+    <div class="error" *ngIf="shippingForm.get('phone')?.touched && shippingForm.get('phone')?.invalid">
+      Telefon mora biti 7-15 karaktera.
+    </div>
+  </div>
 
-        <!-- Address -->
-        <input type="text" placeholder="Address" formControlName="address" />
-        <div *ngIf="shippingForm.get('address')?.touched && shippingForm.get('address')?.invalid" class="error">
-            Address is required (min 5 characters).
-        </div>
+  <!-- Address -->
+  <div class="form-field">
+    <input type="text" placeholder="Adresa" formControlName="address" />
+    <div class="error" *ngIf="shippingForm.get('address')?.touched && shippingForm.get('address')?.invalid">
+      Adresa je obavezna (min 5 karaktera).
+    </div>
+  </div>
 
-        <!-- City -->
-        <input type="text" placeholder="City" formControlName="city" />
-        <div *ngIf="shippingForm.get('city')?.touched && shippingForm.get('city')?.invalid" class="error">
-            City is required.
-        </div>
+  <!-- City -->
+  <div class="form-field">
+    <input type="text" placeholder="Grad" formControlName="city" />
+    <div class="error" *ngIf="shippingForm.get('city')?.touched && shippingForm.get('city')?.invalid">
+      Grad je obavezan.
+    </div>
+  </div>
 
-        <!-- ZIP -->
-        <input type="text" placeholder="ZIP" formControlName="zip" />
-        <div *ngIf="shippingForm.get('zip')?.touched && shippingForm.get('zip')?.invalid" class="error">
-            ZIP code must be 4-10 digits.
-        </div>
-    </form>
+  <!-- ZIP -->
+  <div class="form-field">
+    <input type="text" placeholder="ZIP" formControlName="zip" />
+    <div class="error" *ngIf="shippingForm.get('zip')?.touched && shippingForm.get('zip')?.invalid">
+      ZIP code mora biti izmedju 4-10 cifara.
+    </div>
+  </div>
+</form>
   </section>
 </div>

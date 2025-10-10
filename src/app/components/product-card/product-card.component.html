@@ -1,13 +1,21 @@
 <div class="card-product" (click)="onClick()">
     <div class="image-card">
-        <img 
+        <!-- <img 
           [src]="'/assets/images/' + (product.variants?.[0]?.sku ?? 'placeholder') + '.jpg'" 
-          alt="{{ product.name }}" />
+          alt="{{ product.name }}" /> -->
+          <img 
+          src="images/carusel/2.png" 
+          alt="product" />
     </div>
 
   <div class="card-content">
-    <h5>{{ product.name }} <p>{{ packSizes }}</p></h5>
-    <p class="flavor">{{ flavorNames }}</p>
+    <h5>{{ product.name }} <p>{{ packLabels }}</p></h5>
+    <div class="flavor-container">
+      <span 
+        class="flavor-dot" 
+        [style.background-color]="product.flavorColor">
+      </span><p class="flavor">{{ flavorNames }}</p>
+    </div>
     <div class="d-flex justify-content-between">
         <div class="rating">
         <!-- <span *ngFor="let star of [1,2,3,4,5]" 
